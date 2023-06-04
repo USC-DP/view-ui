@@ -1,3 +1,4 @@
+import CalendarDisplay from "@/components/dashboard/calendar";
 import PageViewButton from "@/components/dashboard/page-view-button";
 import PhotoList from "@/components/dashboard/photo-list";
 import Searchbar from "@/components/dashboard/searchbar";
@@ -21,7 +22,7 @@ export default function Dashboard() {
 
             {pageView == 'list' && <PhotoList></PhotoList>}
             {pageView == 'map' && <p>map</p>}
-            {pageView == 'calendar' && <p>calendar</p>}
+            {pageView == 'calendar' && <CalendarDisplay></CalendarDisplay>}
         </>
     )
 }

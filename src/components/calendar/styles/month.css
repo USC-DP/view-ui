@@ -1,0 +1,10 @@
+.grid-item {
+    margin: 3px;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+}
+
+.date-label {
+    font-size: 12px;
+}
