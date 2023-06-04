@@ -32,7 +32,6 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 height: window.innerHeight,
             });*/
             setPhotoRows(naiveLayout(photoData, window.innerWidth - 200))
-            console.log('resized');
         }
 
         // Add event listener

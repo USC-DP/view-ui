@@ -20,9 +20,9 @@ export default function Dashboard() {
 
             </Box>
 
-            {pageView == 'list' && <PhotoList></PhotoList>}
+            {<PhotoList isVisible={pageView == 'list'}></PhotoList>}
             {pageView == 'map' && <p>map</p>}
-            {pageView == 'calendar' && <CalendarDisplay></CalendarDisplay>}
+            {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
         </>
     )
 }

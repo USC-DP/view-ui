@@ -1,10 +1,42 @@
 .grid-item {
-    margin: 3px;
-    text-align: center;
-    width: 25px;
-    height: 25px;
+  margin: 2px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+
+.month-label {
+    font-size: 24px;
+}
+
+
+.day-of-week-label {
+  font-size: 16px;
 }
 
 .date-label {
-    font-size: 12px;
+  font-size: 16px;
+  text-align: center;
 }
+
+.month-grid {
+  margin: 0 auto;
+  width: 90%;
+  display: grid;
+  row-gap: 10px;
+  grid-template-columns: auto auto auto auto;
+}
+
+.month-item {
+  justify-self: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1300px) {
+    .month-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      justify-content: center;
+    }
+  }
