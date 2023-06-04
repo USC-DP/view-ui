@@ -2,9 +2,10 @@ import { HtmlPhoto, HtmlPhotoRow } from "@/models/photo-display";
 import { Box, Typography } from "@mui/material";
 import { NextPageContext } from "next";
 import photoData from '../../../public/json/images.json';
-import Image from "next/image";
 import React, { useEffect } from "react";
 import { naiveLayout } from "@/algorithms/naive-layout";
+import Image from "./image";
+import ImageListItem from "./image";
 
 
 /*PhotoSection.getInitialProps = async (ctx: NextPageContext) => {
@@ -55,9 +56,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                             {
                                 item.row.map((photo, pIdx) => {
                                     return (
-                                        <Box sx={{ display: 'inline', m: '5px'}}>
-                                            <Image src={photo.src} width={photo.width} height={photo.height} alt=""></Image>
-                                        </Box>
+                                        <ImageListItem photo={photo}></ImageListItem>
                                     )
                                 })
                             }
