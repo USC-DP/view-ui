@@ -1,12 +1,23 @@
 import { HtmlPhoto } from "@/models/photo-display";
-import { Backdrop, Box } from "@mui/material";
+import { Backdrop, Box, Modal } from "@mui/material";
 import Image from "next/image";
 import './styles/image-list-item.css'
 import React from "react";
+import FullImageDisplay from "./full-image-display";
 
 export default function ImageListItem({ photo }: { photo: HtmlPhoto }) {
 
     const [open, setOpen] = React.useState(false);
+
+    React.useEffect(() => {
+        const close = (e: any) => {
+            if (e.keyCode === 27) {
+                setOpen(false)
+            }
+        }
+        window.addEventListener('keydown', close)
+        return () => window.removeEventListener('keydown', close)
+    }, [])
 
     function showFullImageView() {
         setOpen(true)
@@ -19,13 +30,14 @@ export default function ImageListItem({ photo }: { photo: HtmlPhoto }) {
 
             </div>*/}
 
-            <Backdrop
+            <Modal
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
                 onClick={() => setOpen(false)}
+                onClose={() => setOpen(false)}
             >
-                <p>Test</p>
-            </Backdrop>
+                <FullImageDisplay imageSrc={photo.src}></FullImageDisplay>
+            </Modal>
         </div>
     )
 }
