@@ -10,7 +10,7 @@ export default function MyApp({ Component, pageProps }) {
             
             {/*Main content*/ }
             <Box sx={{ flexGrow: 1, width: { sm: `calc(100% - 175px)` } }}>
-                <Box sx={{ mt: '1em', ml: {xs: 0, sm: '1em'} }}>
+                <Box sx={{ mt: '1em', ml: {xs: 0, sm: '1em'}, mr: {xs: 0, sm: '1em'} }}>
 
                     <Component {...pageProps} />
                 </Box>

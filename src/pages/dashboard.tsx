@@ -1,4 +1,5 @@
 import CalendarDisplay from "@/components/dashboard/calendar";
+import MapView from "@/components/dashboard/map-view";
 import PageViewButton from "@/components/dashboard/page-view-button";
 import PhotoList from "@/components/dashboard/photo-list";
 import Searchbar from "@/components/dashboard/searchbar";
@@ -21,7 +22,7 @@ export default function Dashboard() {
             </Box>
 
             {<PhotoList isVisible={pageView == 'list'}></PhotoList>}
-            {pageView == 'map' && <p>map</p>}
+            {<MapView isVisible={pageView == 'map'}></MapView>}
             {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
         </>
     )

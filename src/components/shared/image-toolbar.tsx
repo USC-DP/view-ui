@@ -1,3 +1,4 @@
+import { ImageInfo } from "./image-info";
 import "./styles/image-toolbar.css"
 
 import InfoIcon from '@mui/icons-material/Info';
@@ -5,7 +6,7 @@ import InfoIcon from '@mui/icons-material/Info';
 export function ImageToolbar() {
     return (
         <div className="image-toolbar-container">
-            <InfoIcon />
+            <ImageInfo></ImageInfo>
         </div>
     );
 }
