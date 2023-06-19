@@ -11,7 +11,7 @@ export function ImageInfo() {
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
-        console.log("Opened")
+        //console.log("Opened")
         setDrawerOpen(!drawerOpen);
     };
 
