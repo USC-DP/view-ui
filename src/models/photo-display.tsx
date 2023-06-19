@@ -2,7 +2,7 @@ export interface HtmlPhoto {
     width: number;
     height: number;
     src: string;
-    id: number
+    photoId: number
 }
 
 export interface HtmlPhotoRow {

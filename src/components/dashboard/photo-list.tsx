@@ -1,4 +1,4 @@
-import PhotoSection from "../shared/section";
+import PhotoSection from "../shared/photo-section";
 
 export default function PhotoList({isVisible}: {isVisible?: boolean}) {
     return (

@@ -26,7 +26,7 @@ export default function ImageListItem({ photo }: { photo: HtmlPhoto }) {
 
     return (
         <div className="html-image-container">
-            <Image className="html-image" src={photo.src} width={photo.width} height={photo.height} onClick={handleOpen} alt=""></Image>
+            <Image className="html-image" unoptimized={true} loader={() => photo.src} src={photo.src} width={photo.width} height={photo.height} onClick={handleOpen} alt=""></Image>
             {/*<div className="html-image-overlay">
 
             </div>*/}
