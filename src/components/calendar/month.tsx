@@ -27,11 +27,11 @@ export default function Month({ month, year }: { month: MonthNumber, year: numbe
                     <Typography className="grid-item day-of-week-label">Th</Typography>
                     <Typography className="grid-item day-of-week-label">Fr</Typography>
                     <Typography className="grid-item day-of-week-label">Sa</Typography>
-                    {Array.from(Array(startMonthOffset)).map(_ => <div className="grid-item date-label"></div>)}
+                    {Array.from(Array(startMonthOffset)).map((_, idx) => <div className="grid-item date-label" key={idx}></div>)}
                     {
                         Array.from(Array(monthDays)).map((i, index) => {
                             return (
-                                <Day label={(index + 1).toString()}></Day>
+                                <Day label={(index + 1).toString()} key={index}></Day>
                             )
                         })
                     }

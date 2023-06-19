@@ -14,8 +14,8 @@ export default function Calendar({ isVisible }: {isVisible?: boolean}) {
         <div style={{display: isVisible ? 'block' : 'none'}}>
             <div className="month-grid">
                 {
-                    monthNumbers.map((i) => (
-                        <div className="month-item">
+                    monthNumbers.map((i, index) => (
+                        <div className="month-item" key={index}>
                             <Month month={i} year={2023}></Month>
                         </div>
                     ))
