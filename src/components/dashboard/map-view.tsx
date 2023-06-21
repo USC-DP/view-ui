@@ -38,7 +38,7 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
 
 
     return (
-        <div style={{ display: 'flex', flexGrow: '1', flexDirection: 'column', overflow: 'hidden' }}>
+        <div style={{ display: isVisible ? 'flex' : 'none', flexGrow: '1', flexDirection: 'column', overflow: 'hidden' }}>
 
             <div className="sidebar">
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}

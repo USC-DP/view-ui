@@ -9,11 +9,11 @@ import React from "react";
 
 export default function Dashboard() {
 
-    const [pageView, onPageViewChange] = React.useState<string>('map')
+    const [pageView, onPageViewChange] = React.useState<string>('calendar')
 
     return (
         <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: '10px', md: 0 }, mb: '1em', alignItems: 'center', flexWrap: 'none' }}>
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: '10px', md: 0 }, m: '1em', alignItems: 'center', flexWrap: 'none' }}>
 
                 <PageViewButton pageView={pageView} onPageViewChange={onPageViewChange} />
 
