@@ -106,7 +106,7 @@ export default function Navbar() {
     );
     return (
         <Box sx={{ width: { sm: 175 }, flexShrink: { sm: 0 } }}>
-            <IconButton onClick={handleDrawerToggle}>
+            <IconButton sx={{position: 'absolute'}} onClick={handleDrawerToggle}>
                 <MenuIcon />
 
             </IconButton>
