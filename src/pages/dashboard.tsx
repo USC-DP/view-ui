@@ -9,11 +9,11 @@ import React from "react";
 
 export default function Dashboard() {
 
-    const [pageView, onPageViewChange] = React.useState<string>('list')
+    const [pageView, onPageViewChange] = React.useState<string>('map')
 
     return (
-        <>
-            <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: '10px', md: 0 }, mb: '1em', alignItems: 'center', flexWrap: 'none' }}>
+        <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: '10px', md: 0 }, mb: '1em', alignItems: 'center', flexWrap: 'none' }}>
 
                 <PageViewButton pageView={pageView} onPageViewChange={onPageViewChange} />
 
@@ -21,9 +21,11 @@ export default function Dashboard() {
 
             </Box>
 
-            {<PhotoList isVisible={pageView == 'list'}></PhotoList>}
-            {<MapView isVisible={pageView == 'map'}></MapView>}
-            {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
-        </>
+            
+                {<PhotoList isVisible={pageView == 'list'}></PhotoList>}
+                {<MapView isVisible={pageView == 'map'}></MapView>}
+                {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
+            
+        </div>
     )
 }

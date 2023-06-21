@@ -6,6 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string;
 
 export default function MapView({ isVisible }: { isVisible: boolean }) {
+
     const map = React.useRef<any>();
     const mapContainer = React.useRef<any>();
     const [lng, setLng] = React.useState(-70.9);
@@ -22,13 +23,11 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
             center: [lng, lat],
             zoom: zoom
         });
-        map.current.on('load', function () {
-            map.current.resize();
-        });
     });
 
     React.useEffect(() => {
         if (!map.current) return; // wait for map to initialize
+        map.current.resize();
         map.current.on('move', () => {
             setLng(map.current.getCenter().lng.toFixed(4));
             setLat(map.current.getCenter().lat.toFixed(4));
@@ -39,12 +38,13 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
 
 
     return (
-        <div style={{ display: isVisible ? 'block' : 'none' }}>
+        <div style={{ display: 'flex', flexGrow: '1', flexDirection: 'column', overflow: 'hidden' }}>
 
             <div className="sidebar">
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
             </div>
             <div ref={mapContainer} className="map-container" />
         </div>
+
     );
 }
