@@ -31,7 +31,6 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
     React.useEffect(() => {
         fetchPhotos("095785b9-d07b-4307-9e7f-c16eae55526a").then((d) => {
             setPhotoData(d);
-            console.log(d);
         })
         /*axios.get('http://localhost:5000/photos/from-owner/1')
         .then((data) => setPhotoData(data.data))*/
