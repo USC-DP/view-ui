@@ -9,7 +9,7 @@ import React from "react";
 
 export default function Dashboard() {
 
-    const [pageView, onPageViewChange] = React.useState<string>('calendar')
+    const [pageView, onPageViewChange] = React.useState<string>('list')
 
     return (
         <div style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%'}}>

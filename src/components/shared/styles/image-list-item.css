@@ -9,4 +9,5 @@
 
 .html-image-container {
     display: inline;
+    cursor: pointer;
 }
