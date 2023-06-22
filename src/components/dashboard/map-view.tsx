@@ -13,6 +13,19 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
     const [lat, setLat] = React.useState(42.35);
     const [zoom, setZoom] = React.useState(9);
 
+    let arr = [
+        [-77, 38],
+        [60, 50],
+        [-122, 37]
+    ];
+
+
+
+    function createMarkerElement(): HTMLElement {
+        var markerElement = document.createElement('div');
+        markerElement.className = 'marker'
+        return markerElement;
+    }
 
 
     React.useEffect(() => {
@@ -24,11 +37,13 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
             zoom: zoom
         });
 
+
         map.current.on('load', () => {
             // Add an image to use as a custom marker
+
             map.current.loadImage(
                 'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
-                (error:any, image:any) => {
+                (error: any, image: any) => {
                     if (error) throw error;
                     map.current.addImage('custom-marker', image);
                     // Add a GeoJSON source with 2 points
@@ -36,32 +51,17 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
                         'type': 'geojson',
                         'data': {
                             'type': 'FeatureCollection',
-                            'features': [
-                                {
-                                    // feature for Mapbox DC
-                                    'type': 'Feature',
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [
-                                            -77.03238901390978, 38.913188059745586
-                                        ]
-                                    },
-                                    'properties': {
-                                        'title': 'Mapbox DC'
+                            'features': 
+                                arr.map((i) => {
+                                    return {
+                                        'type': 'Feature',
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': i
+                                        }
                                     }
-                                },
-                                {
-                                    // feature for Mapbox SF
-                                    'type': 'Feature',
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [-122.414, 37.776]
-                                    },
-                                    'properties': {
-                                        'title': 'Mapbox SF'
-                                    }
-                                }
-                            ]
+                                })
+                            
                         }
                     });
 
