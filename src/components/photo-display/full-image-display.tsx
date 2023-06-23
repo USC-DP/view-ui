@@ -16,22 +16,19 @@ export function FullImageDisplay({ photo }: { photo: HtmlPhoto }) {
 
 
     return (
-        <Box style={{ backgroundColor: 'green', height: '100vh' }}>
+        <Box style={{ backgroundColor: 'black', height: '100vh' }}>
             <ImageToolbar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageToolbar>
 
-            <Box sx={{ marginRight: { xs: 0, sm: drawerOpen ? '360px' : 0 }, transition: 'margin 0.2s', height: '100%' }}>
+            <Box sx={{ marginRight: { xs: 0, sm: drawerOpen ? '360px' : 0}, transition: 'margin 0.2s', height: '100%' }}>
 
 
-                <div style={{ width: '50vw', height: '80%', backgroundColor: 'red', margin: 'auto' }}>
-                    
+                <div className='container'>
+                    <Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" className='image' style={{ aspectRatio: photo.width / photo.height }} alt=""></Image>
                 </div>
+
 
             </Box>
 
-            {/*position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', 
-            
-            <Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" style={{ width: 'auto', maxWidth: '80vw', height: 'auto', marginLeft: 'auto' }} alt=""></Image>
-            */}
         </Box>
     );
 }

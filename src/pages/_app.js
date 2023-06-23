@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 export default function MyApp({ Component, pageProps, ...appProps }) {
   const getContent = () => {
     console.log(appProps.router.pathname)
-    if ([`/photo/[id]`, `/404`].includes(appProps.router.pathname)) {
+    if ([`/view/[id]`, `/404`].includes(appProps.router.pathname)) {
       return <Component {...pageProps} />;
     }
 

@@ -13,7 +13,7 @@ export default function ImageListItem({ photo }: { photo: HtmlPhoto }) {
 
     return (
         <div className="html-image-container">
-            <Image className="html-image" unoptimized={true} onClick={() => router.push('/photo/' + photo.photoId)} loader={() => fetchPhoto(photo.photoId)} src={fetchPhoto(photo.photoId)} width={photo.width} height={photo.height} alt=""></Image>
+            <Image className="html-image" unoptimized={true} onClick={() => router.push('/view/' + photo.photoId)} loader={() => fetchPhoto(photo.photoId)} src={fetchPhoto(photo.photoId)} width={photo.width} height={photo.height} alt=""></Image>
         </div>
     )
 }
