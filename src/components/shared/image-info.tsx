@@ -7,11 +7,9 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { Typography } from "@mui/joy";
 
-export function ImageInfo() {
-    const [drawerOpen, setDrawerOpen] = React.useState(false);
+export function ImageInfo({ drawerOpen, setDrawerOpen }: { drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     const handleDrawerToggle = () => {
-        //console.log("Opened")
         setDrawerOpen(!drawerOpen);
     };
 
@@ -21,16 +19,16 @@ export function ImageInfo() {
             <List disablePadding sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <ListItem disablePadding>
                     <IconButton onClick={handleDrawerToggle}>
-                        <CloseIcon/>
+                        <CloseIcon />
                     </IconButton>
-                    <Typography level="h5">Infomation</Typography>
+                    <Typography level="h5">Information</Typography>
                 </ListItem>
 
             </List>
         </Box>
     );
     return (
-        <Box sx={{ width: { sm: 175 }, flexShrink: { sm: 0 } }}>
+        <Box>
             <IconButton onClick={handleDrawerToggle}>
                 <InfoIcon />
             </IconButton>
@@ -43,7 +41,7 @@ export function ImageInfo() {
                 }}
                 anchor="right"
                 sx={{
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 175 },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: {xs: '100%', sm: 360} },
                 }}
             >
                 {drawerContent}
