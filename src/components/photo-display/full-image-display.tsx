@@ -16,29 +16,22 @@ export function FullImageDisplay({ photo }: { photo: HtmlPhoto }) {
 
 
     return (
-        <Box style={{ backgroundColor: 'white', height: '100vh' }}>
+        <Box style={{ backgroundColor: 'green', height: '100vh' }}>
             <ImageToolbar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageToolbar>
 
-            <Box sx={{ marginRight: { xs: 0, sm: drawerOpen? '360px': 0 }, transition: 'margin 0.2s'}}>
-                
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-                    dolor purus non enim praesent elementum facilisis leo vel. Risus at
-                    ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-                    quisque non tellus. Convallis convallis tellus id interdum velit
-                    laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-                    adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-                    integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-                    eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-                    quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-                    vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-                    lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-                    faucibus et molestie ac.
-                
-                {/*<Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" style={{ width: '95%', height: 'auto', margin: 'auto' }} alt=""></Image>*/}
+            <Box sx={{ marginRight: { xs: 0, sm: drawerOpen ? '360px' : 0 }, transition: 'margin 0.2s', height: '100%' }}>
+
+
+                <div style={{ width: '50vw', height: '80%', backgroundColor: 'red', margin: 'auto' }}>
+                    
+                </div>
+
             </Box>
 
-            {/*position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', */}
+            {/*position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', 
+            
+            <Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" style={{ width: 'auto', maxWidth: '80vw', height: 'auto', marginLeft: 'auto' }} alt=""></Image>
+            */}
         </Box>
     );
 }

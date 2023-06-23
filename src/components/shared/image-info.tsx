@@ -17,7 +17,7 @@ export function ImageInfo({ drawerOpen, setDrawerOpen }: { drawerOpen: boolean, 
     const drawerContent = (
         <Box sx={{ bgcolor: 'white.paper', height: '100vh', m: 0, overflow: 'none', zIndex: 500 }}>
             <List disablePadding sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <ListItem disablePadding>
+                <ListItem disablePadding sx={{padding: '4px'}}>
                     <IconButton onClick={handleDrawerToggle}>
                         <CloseIcon />
                     </IconButton>
