@@ -1,40 +1,44 @@
 import { HtmlPhoto, HtmlPhotoRow } from "@/models/photo-display";
 import { Box, Typography } from "@mui/material";
-import { NextPageContext } from "next";
-//import photoData from '../../../public/json/images.json';
-import React, { useEffect } from "react";
+import React from "react";
 import { naiveLayout } from "@/algorithms/naive-layout";
-import Image from "./image";
 import ImageListItem from "./image";
 
-import axios from 'axios'
 import { fetchPhotos } from "@/hooks/fetchPhotos";
+import useSWR from "swr";
+import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
+import { fetchPhotoData } from "@/hooks/fetch-photo-data";
 
 
-/*PhotoSection.getInitialProps = async (ctx: NextPageContext) => {
-    return { photoRows:  }
-}*/
-
-
-interface window {
-    width: number,
-    height: number
-}
+const fetcher = (id: string) => fetchPhotos(id).then((d) => { return d })
 
 export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][] }*/) {
 
+    const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
+
     const [photoRows, setPhotoRows] = React.useState<HtmlPhotoRow[]>();
-    const [photoData, setPhotoData] = React.useState<HtmlPhoto[] | any>();
 
     //const [windowSize, setWindowSize] = React.useState<window>();
-    
-    React.useEffect(() => {
-        fetchPhotos("095785b9-d07b-4307-9e7f-c16eae55526a").then((d) => {
-            setPhotoData(d);
-        })
-        /*axios.get('http://localhost:5000/photos/from-owner/1')
-        .then((data) => setPhotoData(data.data))*/
-    }, [])
+
+    const { data, error, isLoading } = useSWR("095785b9-d07b-4307-9e7f-c16eae55526a", fetcher)
+
+    const viewPhoto = async (photoId: string) => {
+
+        setVisiblePhotoContent((i) => ({
+            ...i,
+            isVisible: true,
+            photo: null
+        }))
+
+        /*await fetchPhotoData(photoId).then(
+            (d) => {
+            }
+        )*/
+        window.history.pushState(null, '', "/view/" + photoId);
+    }
+
+
+
 
     React.useEffect(() => {
         // only execute all the code below in client side
@@ -46,8 +50,8 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 height: window.innerHeight,
             });*/
 
-            if (photoData) {
-                setPhotoRows(naiveLayout(photoData, window.innerWidth - 200))
+            if (data) {
+                setPhotoRows(naiveLayout(data, window.innerWidth - 200))
             }
 
         }
@@ -58,7 +62,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
         // Call handler right away so state gets updated with initial window size
         handleResize();
 
-    }, [photoData]); // Empty array ensures that effect is only run on mount
+    }, [data]); // Empty array ensures that effect is only run on mount
 
 
     return (
@@ -67,7 +71,13 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
             <Typography sx={{ fontSize: '18px' }}>Mon, May 24</Typography>
 
             {
-                photoRows && photoRows.map((item, rIdx) => {
+                data && data.map((i: HtmlPhoto) => {
+                    return <ImageListItem photo={i} key={i.photoId} viewPhoto={viewPhoto}></ImageListItem>
+                })
+            }
+
+            {/*
+                memoizedPhotoRows && memoizedPhotoRows.map((item, rIdx) => {
                     return (
                         <Box sx={{ display: 'inline' }} key={item.id}>
                             {
@@ -81,7 +91,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                         </Box>
                     )
                 })
-            }
+            */}
 
         </>
     )

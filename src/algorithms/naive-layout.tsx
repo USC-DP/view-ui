@@ -23,6 +23,10 @@ export function naiveLayout(photos: HtmlPhoto[], viewPortWidth: number) {
 
         }
     });
+
+    for (let i = 0; i < 500000000; i++) {
+
+    }
     row.length && rows.push({row: row, id: id});
     return rows;
 }

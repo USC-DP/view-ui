@@ -7,7 +7,7 @@ import React from "react";
 import { FullImageDisplay } from "@/components/photo-display/full-image-display";
 
 export default function Photo() {
-    const router = useRouter();
+    /*const router = useRouter();
 
     const [photo, setPhoto] = React.useState<HtmlPhoto>();
 
@@ -31,5 +31,5 @@ export default function Photo() {
             }
             
         </>
-    );
+    );*/
 }

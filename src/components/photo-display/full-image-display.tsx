@@ -7,7 +7,7 @@ import React from 'react';
 import { Box, Button, Typography, styled, useTheme } from '@mui/material';
 
 
-export function FullImageDisplay({ photo }: { photo: HtmlPhoto }) {
+export function FullImageDisplay({ photo, isVisible }: { photo: HtmlPhoto, isVisible: boolean }) {
     const theme = useTheme();
 
 
@@ -16,17 +16,16 @@ export function FullImageDisplay({ photo }: { photo: HtmlPhoto }) {
 
 
     return (
-        <Box style={{ backgroundColor: 'black', height: '100vh' }}>
+        
+        photo && <Box style={{display: isVisible ? 'block' : 'none', visibility: isVisible ? 'visible' : 'hidden', backgroundColor: 'black', height: '100vh'}}>
             <ImageToolbar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageToolbar>
 
             <Box sx={{ marginRight: { xs: 0, sm: drawerOpen ? '360px' : 0}, transition: 'margin 0.2s', height: '100%' }}>
 
 
                 <div className='container'>
-                    <Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" className='image' style={{ aspectRatio: photo.width / photo.height }} alt=""></Image>
+                    {/*<Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" className='image' style={{ aspectRatio: photo.width / photo.height }} alt=""></Image>*/}
                 </div>
-
-
             </Box>
 
         </Box>
