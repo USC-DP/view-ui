@@ -21,10 +21,10 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     }
 
     window.addEventListener('popstate', () => {
-      /*setVisiblePhotoContent((i) => ({
+      setVisiblePhotoContent((i) => ({
         photo: null,
         isVisible: false,
-      }))*/
+      }))
     })
     
   }, []);
@@ -38,7 +38,7 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     return (
       <VisiblePhotoContext.Provider value={{visiblePhotoContent, setVisiblePhotoContent}}>
         
-        <FullImageDisplay isVisible={visiblePhotoContent.isVisible} photo={visiblePhotoContent.photo}></FullImageDisplay>
+        {<FullImageDisplay isVisible={visiblePhotoContent.isVisible} photo={visiblePhotoContent.photo}></FullImageDisplay>}
 
         <Box sx={{ display: !visiblePhotoContent.isVisible ? "flex" : "none" }}>
             <Navbar />

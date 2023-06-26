@@ -24,7 +24,7 @@ export function FullImageDisplay({ photo, isVisible }: { photo: HtmlPhoto, isVis
 
 
                 <div className='container'>
-                    {/*<Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" className='image' style={{ aspectRatio: photo.width / photo.height }} alt=""></Image>*/}
+                    {<Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" className='image' style={{ aspectRatio: photo.width / photo.height }} alt=""></Image>}
                 </div>
             </Box>
 

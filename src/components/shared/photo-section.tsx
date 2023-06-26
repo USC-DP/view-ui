@@ -24,16 +24,17 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
 
     const viewPhoto = async (photoId: string) => {
 
-        setVisiblePhotoContent((i) => ({
-            ...i,
-            isVisible: true,
-            photo: null
-        }))
-
-        /*await fetchPhotoData(photoId).then(
+        await fetchPhotoData(photoId).then(
             (d) => {
+                setVisiblePhotoContent((i) => ({
+                    ...i,
+                    photo: d,
+                    isVisible: true,
+
+                }))
             }
-        )*/
+        )
+
         window.history.pushState(null, '', "/view/" + photoId);
     }
 
