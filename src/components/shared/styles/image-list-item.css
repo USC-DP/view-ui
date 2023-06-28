@@ -1,13 +1,27 @@
 .html-image {
-    margin: 2.5px;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.html-image:hover {
+  transform: scale(1.01);
 }
 
 .html-image-overlay {
-
 }
 
-
 .html-image-container {
-    display: inline;
-    cursor: pointer;
+  /*flex: 0 0 auto;*/
+  cursor: pointer;
+  margin: 2.5px;
+}
+
+.active {
+  /*position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2); /* Adjust the scale as needed
+  z-index: 9999;*/
 }

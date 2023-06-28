@@ -5,9 +5,11 @@ import Image from "next/image";
 import { fetchPhoto } from '@/hooks/fetch-photo';
 import React from 'react';
 import { Box, Button, Typography, styled, useTheme } from '@mui/material';
+import { VisiblePhotoContentType, VisiblePhotoContext } from '@/contexts/visible-photo-context';
+import { relative } from 'path';
 
 
-export function FullImageDisplay({ photo, isVisible }: { photo: HtmlPhoto, isVisible: boolean }) {
+export function FullImageDisplay({ data, setData }: { data: VisiblePhotoContentType, setData: React.Dispatch<React.SetStateAction<VisiblePhotoContentType>> }) {
     const theme = useTheme();
 
 
@@ -16,15 +18,48 @@ export function FullImageDisplay({ photo, isVisible }: { photo: HtmlPhoto, isVis
 
 
     return (
-        
-        photo && <Box style={{display: isVisible ? 'block' : 'none', visibility: isVisible ? 'visible' : 'hidden', backgroundColor: 'black', height: '100vh'}}>
+
+        <Box className={data.isVisible ? "overlay" : "overlay-hidden"}>
+            <div className={`background ${data.isVisible ? 'background-active' : ''}`}></div>
             <ImageToolbar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageToolbar>
 
-            <Box sx={{ marginRight: { xs: 0, sm: drawerOpen ? '360px' : 0}, transition: 'margin 0.2s', height: '100%' }}>
+            <Box sx={{ marginRight: { xs: 0, sm: drawerOpen ? '360px' : 0 }, transition: 'margin 0.2s', height: '100%' }}>
 
 
-                <div className='container'>
-                    {<Image loader={() => fetchPhoto(photo.photoId)} unoptimized={true} src={fetchPhoto(photo.photoId)} width={0} height={0} sizes="100vw" className='image' style={{ aspectRatio: photo.width / photo.height }} alt=""></Image>}
+                <div className='container'
+                    /*style={
+                        !data.isVisible ?
+                            {
+                                width: data.width
+                            }
+                            :
+                            {
+                                width: '100%',
+                            }
+
+                    }*/
+                >
+
+                    {data.photo !== null
+                        &&
+                        <Image
+
+                            unoptimized={true}
+                            src={fetchPhoto(data.photo.photoId)}
+                            width={0} height={0} sizes="100vw"
+                            className={`image`}
+                            style={!data.isVisible ?
+                                {
+                                    aspectRatio: data.photo.width / data.photo.height,
+                                    transform: `translate(calc(${data.xCoord}px - 50vw), calc(${data.yCoord}px - 50vh))`,
+                                    maxWidth: data.width,
+                                    maxHeight: data.height
+                                } :
+                                {
+                                    transform: `translate(0,${window.scrollY}px)`,
+                                }}
+                            alt=""></Image>}
+
                 </div>
             </Box>
 

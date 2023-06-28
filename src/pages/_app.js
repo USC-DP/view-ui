@@ -38,9 +38,9 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     return (
       <VisiblePhotoContext.Provider value={{visiblePhotoContent, setVisiblePhotoContent}}>
         
-        {<FullImageDisplay isVisible={visiblePhotoContent.isVisible} photo={visiblePhotoContent.photo}></FullImageDisplay>}
+        {<FullImageDisplay data={visiblePhotoContent} setData={setVisiblePhotoContent}></FullImageDisplay>}
 
-        <Box sx={{ display: !visiblePhotoContent.isVisible ? "flex" : "none" }}>
+        <Box sx={{ display: !visiblePhotoContent.isVisible ? "flex" : "flex" }}>
             <Navbar />
 
             {/*Main content*/}

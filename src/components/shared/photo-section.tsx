@@ -8,6 +8,7 @@ import { fetchPhotos } from "@/hooks/fetchPhotos";
 import useSWR from "swr";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { fetchPhotoData } from "@/hooks/fetch-photo-data";
+import { fetchPhoto } from "@/hooks/fetch-photo";
 
 
 const fetcher = (id: string) => fetchPhotos(id).then((d) => { return d })
@@ -15,6 +16,7 @@ const fetcher = (id: string) => fetchPhotos(id).then((d) => { return d })
 export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][] }*/) {
 
     const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
+
 
     const [photoRows, setPhotoRows] = React.useState<HtmlPhotoRow[]>();
 
@@ -29,9 +31,14 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 setVisiblePhotoContent((i) => ({
                     ...i,
                     photo: d,
-                    isVisible: true,
-
                 }))
+
+                setTimeout(() => {
+                    setVisiblePhotoContent((i) => ({
+                        ...i,
+                        isVisible: true
+                    }))
+                }, 100)
             }
         )
 
@@ -71,11 +78,16 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
             <Typography sx={{ fontSize: '24px' }}>Big Sur</Typography>
             <Typography sx={{ fontSize: '18px' }}>Mon, May 24</Typography>
 
-            {
-                data && data.map((i: HtmlPhoto) => {
-                    return <ImageListItem photo={i} key={i.photoId} viewPhoto={viewPhoto}></ImageListItem>
-                })
-            }
+            <div style={{
+                display: 'flex',
+                flexWrap: 'wrap'
+            }}>
+                {
+                    data && data.map((i: HtmlPhoto) => {
+                        return <ImageListItem photo={i} key={i.photoId} viewPhoto={viewPhoto}></ImageListItem>
+                    })
+                }
+            </div>
 
             {/*
                 memoizedPhotoRows && memoizedPhotoRows.map((item, rIdx) => {
