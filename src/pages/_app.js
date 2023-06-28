@@ -20,9 +20,10 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
       }))
     }
 
-    window.addEventListener('popstate', () => {
+    window.addEventListener('popstate', (e) => {
+
       setVisiblePhotoContent((i) => ({
-        photo: null,
+        ...i,
         isVisible: false,
       }))
     })

@@ -41,7 +41,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 }, 100)
             }
         )
-
+        //window.history.pushState(null, '', "/dashboard");
         window.history.pushState(null, '', "/view/" + photoId);
     }
 

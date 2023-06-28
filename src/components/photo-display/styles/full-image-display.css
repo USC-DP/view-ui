@@ -5,13 +5,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
   background-color: #000;
   transition: opacity 1s;
 }
 
 .background-active {
   opacity: 1;
+}
+
+.background-inactive {
+  opacity: 0;
 }
 
 .overlay {
@@ -23,6 +26,7 @@
 }
 
 .overlay-hidden {
+  transition-delay: 3s;
   opacity: 0;
   visibility: hidden;
   height: 0;
@@ -37,7 +41,8 @@
 }
 
 .image {
-  transition: transform .21s ease-in, max-width 0.21s ease-in, max-height 0.21s ease-in;
+  position: fixed;
+  transition: transform 3s ease-in, max-width 3s ease-in, max-height 3s ease-in;
   width: auto;
   opacity: 1;
   height: auto;

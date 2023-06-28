@@ -19,26 +19,15 @@ export function FullImageDisplay({ data, setData }: { data: VisiblePhotoContentT
 
     return (
 
-        <Box className={data.isVisible ? "overlay" : "overlay-hidden"}>
-            <div className={`background ${data.isVisible ? 'background-active' : ''}`}></div>
+        <Box className={`overlay ${data.isVisible ? "" : "overlay-hidden"}`}>
+            <div className={`background ${data.isVisible ? 'background-active' : 'background-inactive'}`}></div>
+
             <ImageToolbar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageToolbar>
 
             <Box sx={{ marginRight: { xs: 0, sm: drawerOpen ? '360px' : 0 }, transition: 'margin 0.2s', height: '100%' }}>
 
 
-                <div className='container'
-                    /*style={
-                        !data.isVisible ?
-                            {
-                                width: data.width
-                            }
-                            :
-                            {
-                                width: '100%',
-                            }
-
-                    }*/
-                >
+                <div className='container'>
 
                     {data.photo !== null
                         &&
@@ -53,10 +42,11 @@ export function FullImageDisplay({ data, setData }: { data: VisiblePhotoContentT
                                     aspectRatio: data.photo.width / data.photo.height,
                                     transform: `translate(calc(${data.xCoord}px - 50vw), calc(${data.yCoord}px - 50vh))`,
                                     maxWidth: data.width,
-                                    maxHeight: data.height
+                                    maxHeight: data.height,
                                 } :
                                 {
                                     transform: `translate(0,${window.scrollY}px)`,
+                                    
                                 }}
                             alt=""></Image>}
 
