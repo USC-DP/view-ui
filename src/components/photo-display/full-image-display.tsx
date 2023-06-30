@@ -1,3 +1,4 @@
+"use client"
 import { HtmlPhoto } from '@/models/photo-display';
 import { ImageToolbar } from './image-toolbar';
 import './styles/full-image-display.css'
@@ -15,10 +16,20 @@ export function FullImageDisplay({ data, setData }: { data: VisiblePhotoContentT
 
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
+    const [animationFrames, setAnimationFrames] = React.useState("");
+    const [animationFramesTwo, setAnimationFramesTwo] = React.useState("");
 
+    React.useEffect(() => {
+        /*window.addEventListener("popstate", () => {
+            //@ts-ignore
+            if (document.startViewTransition) {
+                //@ts-ignore
+                
+            }
+        })*/
+    }, [])
 
     return (
-
         <Box className={`overlay ${data.isVisible ? "" : "overlay-hidden"}`}>
             <div className={`background ${data.isVisible ? 'background-active' : 'background-inactive'}`}></div>
 
@@ -28,28 +39,14 @@ export function FullImageDisplay({ data, setData }: { data: VisiblePhotoContentT
 
 
                 <div className='container'>
-
                     {data.photo !== null
                         &&
                         <Image
-
                             unoptimized={true}
                             src={fetchPhoto(data.photo.photoId)}
                             width={0} height={0} sizes="100vw"
                             className={`image`}
-                            style={!data.isVisible ?
-                                {
-                                    aspectRatio: data.photo.width / data.photo.height,
-                                    transform: `translate(calc(${data.xCoord}px - 50vw), calc(${data.yCoord}px - 50vh))`,
-                                    maxWidth: data.width,
-                                    maxHeight: data.height,
-                                } :
-                                {
-                                    transform: `translate(0,${window.scrollY}px)`,
-                                    
-                                }}
                             alt=""></Image>}
-
                 </div>
             </Box>
 

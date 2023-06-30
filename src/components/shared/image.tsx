@@ -17,12 +17,24 @@ export default function ImageListItem({ photo, viewPhoto }: { photo: HtmlPhoto, 
 
     const [clicked, setClicked] = React.useState<boolean>(false);
 
+    React.useEffect(() => {
+        if(photo.photoId == "1852565c-c4b8-46f3-bc28-c48d35fb4b00") {
+            //@ts-ignore
+            imageRef.current.style.viewTransitionName = "image";
+        }
+    }, []);
+
+
     function click() {
         if (imageRef.current) {
             const rect = imageRef.current.getBoundingClientRect();
-            let x = rect.left + rect.width / 2 + window.scrollX;
-            let y = rect.top + rect.height / 2 + window.scrollY;
-            console.log(window.scrollY)
+            
+            //@ts-ignore
+            imageRef.current.style.viewTransitionName = "image";
+            
+
+            let x = rect.left + rect.width / 2;// + window.scrollX;
+            let y = rect.top + rect.height / 2;// + window.scrollY;
             console.log('Image Coordinates (x, y):', x, y);
             setVisiblePhotoContent((i) => ({
                 ...i,
@@ -43,12 +55,9 @@ export default function ImageListItem({ photo, viewPhoto }: { photo: HtmlPhoto, 
             onClick={() => click()}>
             <div ref={imageRef} className="html-image" style={{
                 backgroundImage: `url(${fetchPhoto(photo.photoId)})`,
-                backgroundSize: 'contain'
-
-
+                backgroundSize: 'contain',
+                viewTransitionName: photo.photoId == "1852565c-c4b8-46f3-bc28-c48d35fb4b00" ? "image" : 'none'
             }}></div>
-            {/*<Image style={{ transform: clicked ? 'matrix(1,0,0,1,0,0)' : 'none' }} className="html-image" unoptimized={true} onClick={() => click()} loader={() => fetchPhoto(photo.photoId)} src={fetchPhoto(photo.photoId)} width={photo.width} height={photo.height} alt=""></Image>*/}
-
         </div>
     )
 }

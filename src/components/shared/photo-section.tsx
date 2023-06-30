@@ -9,11 +9,13 @@ import useSWR from "swr";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { fetchPhotoData } from "@/hooks/fetch-photo-data";
 import { fetchPhoto } from "@/hooks/fetch-photo";
-
+import { useRouter } from "next/router";
 
 const fetcher = (id: string) => fetchPhotos(id).then((d) => { return d })
 
 export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][] }*/) {
+
+    const router = useRouter();
 
     const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
@@ -30,19 +32,16 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
             (d) => {
                 setVisiblePhotoContent((i) => ({
                     ...i,
+                    isVisible: true,
                     photo: d,
                 }))
-
-                setTimeout(() => {
-                    setVisiblePhotoContent((i) => ({
-                        ...i,
-                        isVisible: true
-                    }))
-                }, 100)
             }
         )
         //window.history.pushState(null, '', "/dashboard");
-        window.history.pushState(null, '', "/view/" + photoId);
+
+        //window.history.pushState(null, '', "/view/" + photoId);
+        //@ts-ignore
+        document.startViewTransition(() => router.push("/view/" + photoId))      
     }
 
 
@@ -65,7 +64,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
         }
 
         // Add event listener
-        window.addEventListener("resize", handleResize);
+        //window.addEventListener("resize", handleResize);
 
         // Call handler right away so state gets updated with initial window size
         handleResize();

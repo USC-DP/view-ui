@@ -12,7 +12,7 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     isVisible: false,
   });
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     if (![`/view/[id]`, `/404`].includes(appProps.router.pathname)) {
       setVisiblePhotoContent((i) => ({
         ...i,
@@ -28,20 +28,22 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
       }))
     })
     
-  }, []);
+  }, []);*/
 
   const getContent = () => {
 
-    if ([`/view/[id]`, `/404`].includes(appProps.router.pathname)) {
-      return <Component {...pageProps} />;
+    if ([`/404`].includes(appProps.router.pathname)) {
+      return (
+        <VisiblePhotoContext.Provider value={{ visiblePhotoContent, setVisiblePhotoContent }}>
+          <Component {...pageProps} />;
+        </VisiblePhotoContext.Provider>
+      )
     }
 
     return (
       <VisiblePhotoContext.Provider value={{visiblePhotoContent, setVisiblePhotoContent}}>
-        
-        {<FullImageDisplay data={visiblePhotoContent} setData={setVisiblePhotoContent}></FullImageDisplay>}
 
-        <Box sx={{ display: !visiblePhotoContent.isVisible ? "flex" : "flex" }}>
+        <Box sx={{ display: "flex" }}>
             <Navbar />
 
             {/*Main content*/}
