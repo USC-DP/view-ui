@@ -10,6 +10,7 @@ import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { fetchPhotoData } from "@/hooks/fetch-photo-data";
 import { fetchPhoto } from "@/hooks/fetch-photo";
 import { useRouter } from "next/router";
+import { ViewablePhotosContext } from "@/contexts/viewable-photos-context";
 
 const fetcher = (id: string) => fetchPhotos(id).then((d) => { return d })
 
@@ -19,8 +20,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
 
     const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
-
-    const [photoRows, setPhotoRows] = React.useState<HtmlPhotoRow[]>();
+    const { viewablePhotos, setViewablePhotos } = React.useContext(ViewablePhotosContext);
 
     //const [windowSize, setWindowSize] = React.useState<window>();
 
@@ -56,9 +56,15 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 width: window.innerWidth,
                 height: window.innerHeight,
             });*/
-
-            if (data) {
-                setPhotoRows(naiveLayout(data, window.innerWidth - 200))
+            
+            if (data && viewablePhotos.photoRows.length == 0) {
+                let htmlPhotoRowsData = naiveLayout(data, window.innerWidth - 200);
+                setViewablePhotos((i) => ({
+                    ...i,
+                    photoRows: htmlPhotoRowsData
+                }))
+                console.log("data was", htmlPhotoRowsData);
+                console.log("data was", viewablePhotos);
             }
 
         }
@@ -81,9 +87,22 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 display: 'flex',
                 flexWrap: 'wrap'
             }}>
-                {
-                    data && data.map((i: HtmlPhoto) => {
+                {/*
+                    viewablePhotos && viewablePhotos.photoRows.map((i: HtmlPhoto) => {
                         return <ImageListItem photo={i} key={i.photoId} viewPhoto={viewPhoto}></ImageListItem>
+                    })*/
+                    viewablePhotos.photoRows && viewablePhotos.photoRows.map((photoRow) => {
+                        return (
+                            <Box sx={{ display: 'inline' }} key={photoRow.id}>
+                                {
+                                    photoRow.row.map((photo) => {
+                                        return (
+                                            <ImageListItem photo={photo} key={photo.photoId} viewPhoto={viewPhoto}></ImageListItem>
+                                        )
+                                    })
+                                }
+                            </Box>
+                        )
                     })
                 }
             </div>
