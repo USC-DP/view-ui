@@ -8,25 +8,25 @@ import React from 'react';
 import { Box, Button, Typography, styled, useTheme } from '@mui/material';
 import { VisiblePhotoContentType, VisiblePhotoContext } from '@/contexts/visible-photo-context';
 import { relative } from 'path';
+import { PreviousContentContext } from '@/contexts/previous-content-context';
 
 
 export function FullImageDisplay({ data, setData }: { data: VisiblePhotoContentType, setData: React.Dispatch<React.SetStateAction<VisiblePhotoContentType>> }) {
     const theme = useTheme();
 
+    const { previousContent, setPreviousContent } = React.useContext(PreviousContentContext);
 
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
-    const [animationFrames, setAnimationFrames] = React.useState("");
-    const [animationFramesTwo, setAnimationFramesTwo] = React.useState("");
-
     React.useEffect(() => {
-        /*window.addEventListener("popstate", () => {
-            //@ts-ignore
-            if (document.startViewTransition) {
+
+        if (data.photo != null && data.photo.photoId) {
+            setPreviousContent((i) => ({
+                ...i,
                 //@ts-ignore
-                
-            }
-        })*/
+                photoId: data.photo.photoId
+            }));
+        }
     }, [])
 
     return (

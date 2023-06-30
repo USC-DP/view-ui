@@ -11,6 +11,7 @@ import { fetchPhotoData } from "@/hooks/fetch-photo-data";
 import { fetchPhoto } from "@/hooks/fetch-photo";
 import { useRouter } from "next/router";
 import { ViewablePhotosContext } from "@/contexts/viewable-photos-context";
+import { PreviousContentContext } from "@/contexts/previous-content-context";
 
 const fetcher = (id: string) => fetchPhotos(id).then((d) => { return d })
 
@@ -21,6 +22,8 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
     const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
     const { viewablePhotos, setViewablePhotos } = React.useContext(ViewablePhotosContext);
+
+    const { previousContent, setPreviousContent } = React.useContext(PreviousContentContext);
 
     //const [windowSize, setWindowSize] = React.useState<window>();
 
@@ -44,6 +47,10 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
         document.startViewTransition(() => router.push("/view/" + photoId))      
     }
 
+    React.useEffect(() => {
+        window.scrollTo(0, previousContent.scrollPosition)
+    }, [])
+
 
 
 
@@ -63,8 +70,6 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                     ...i,
                     photoRows: htmlPhotoRowsData
                 }))
-                console.log("data was", htmlPhotoRowsData);
-                console.log("data was", viewablePhotos);
             }
 
         }

@@ -5,6 +5,7 @@ import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import React from "react";
 import { FullImageDisplay } from "@/components/photo-display/full-image-display";
 import { ViewablePhotosContext, ViewablePhotosType } from "@/contexts/viewable-photos-context";
+import { PreviousContentContext } from "@/contexts/previous-content-context";
 
 export default function MyApp({ Component, pageProps, ...appProps }) {
 
@@ -16,6 +17,11 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
   const [viewablePhotos, setViewablePhotos] = React.useState({
     photoRows: []
   });
+
+  const [previousContent, setPreviousContent] = React.useState({
+    photoId: null,
+    scrollPosition: 0
+  })
 
   /*React.useEffect(() => {
     if (![`/view/[id]`, `/404`].includes(appProps.router.pathname)) {
@@ -40,8 +46,10 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     if ([`/404`].includes(appProps.router.pathname)) {
       return (
         <VisiblePhotoContext.Provider value={{ visiblePhotoContent, setVisiblePhotoContent }}>
-          <ViewablePhotosContext.Provider value={{viewablePhotos, setViewablePhotos}}>
-            <Component {...pageProps} />;
+          <ViewablePhotosContext.Provider value={{ viewablePhotos, setViewablePhotos }}>
+            <PreviousContentContext.Provider value={{previousContent, setPreviousContent}}>
+              <Component {...pageProps} />;
+              </PreviousContentContext.Provider>
           </ViewablePhotosContext.Provider>            
         </VisiblePhotoContext.Provider>
 
@@ -50,7 +58,8 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
 
     return (
       <VisiblePhotoContext.Provider value={{visiblePhotoContent, setVisiblePhotoContent}}>
-        <ViewablePhotosContext.Provider value={{viewablePhotos, setViewablePhotos}}>
+        <ViewablePhotosContext.Provider value={{ viewablePhotos, setViewablePhotos }}>
+        <PreviousContentContext.Provider value={{previousContent, setPreviousContent}}>
         <Box sx={{ display: "flex" }}>
             <Navbar />
 
@@ -65,7 +74,8 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
               <Component {...pageProps} />
               {/*<Box sx={{ mt: '1em', ml: {xs: 0, sm: '1em'}, mr: {xs: 0, sm: '1em'} }}></Box>*/}
             </Box>
-          </Box>
+            </Box>
+            </PreviousContentContext.Provider>
           </ViewablePhotosContext.Provider>
       </VisiblePhotoContext.Provider>
     );

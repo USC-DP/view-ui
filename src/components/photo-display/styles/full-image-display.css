@@ -43,8 +43,6 @@
 
 .image {
   view-transition-name: image;
-  contain: paint;
-  position: absolute;
   z-index: 1100;
   width: auto;
   opacity: 1;
