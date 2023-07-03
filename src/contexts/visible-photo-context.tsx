@@ -4,10 +4,6 @@ import React from "react"
 export type VisiblePhotoContentType = {
     photo: HtmlPhoto | null,
     isVisible: boolean,
-    xCoord: number,
-    yCoord: number,
-    width: number,
-    height: number,
 }
 
 export const VisiblePhotoContext = React.createContext<{
@@ -21,10 +17,6 @@ export const VisiblePhotoContext = React.createContext<{
             height: 1,
         },
         isVisible: false,
-        xCoord: 0,
-        yCoord: 0,
-        width: 0,
-        height: 0
     },
     setVisiblePhotoContent: () => { },
 

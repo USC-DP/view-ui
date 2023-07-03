@@ -9,10 +9,15 @@ import { fetchPhoto } from "@/hooks/fetch-photo";
 import Link from "next/link";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { PreviousContentContext } from "@/contexts/previous-content-context";
+import { flushSync } from "react-dom";
+import useViewTransitionRouter from "@/transition-lib/use-transition-router";
+//import useViewTransitionRouter from "@/transition-lib/use-transition-router";
 
 export default function ImageListItem({ photo, viewPhoto }: { photo: HtmlPhoto, viewPhoto: (photoId: string) => void }) {
 
     const imageRef = React.useRef<HTMLDivElement>(null);
+
+    const router = useViewTransitionRouter();
 
     const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
@@ -22,32 +27,46 @@ export default function ImageListItem({ photo, viewPhoto }: { photo: HtmlPhoto, 
 
 
     function click() {
-        if (imageRef.current) {
-            const rect = imageRef.current.getBoundingClientRect();
-            
-            //@ts-ignore
-            imageRef.current.style.viewTransitionName = "image";
-            setPreviousContent((i) => ({
-                ...i,
-                scrollPosition: window.scrollY,
-                photoId: photo.photoId
-            }));
-            
-        }
-        setClicked(!clicked);
 
-        viewPhoto(photo.photoId)
+        flushSync(() => {
+            if (imageRef.current) {
+                //@ts-ignore
+                //imageRef.current.style.viewTransitionName = "image";
+                setPreviousContent((i) => ({
+                    ...i,
+                    scrollPosition: window.scrollY,
+                    photoId: photo.photoId
+                }));
+    
+                setVisiblePhotoContent((i) => ({
+                    ...i,
+                    photo: photo
+                }))
+    
+            }
+            setClicked(!clicked);
+        })
+        router.push("/view/" + photo.photoId);
     }
 
 
     return (
-        <div className={`html-image-container ${clicked ? 'active' : ''}`} style={{ width: photo.width, height: photo.height, transition: 'all 0.3s' }}
-            onClick={() => click()}>
-            <div ref={imageRef} className="html-image" style={{
-                backgroundImage: `url(${fetchPhoto(photo.photoId)})`,
-                backgroundSize: 'contain',
-                viewTransitionName: photo.photoId == previousContent.photoId ? "image" : 'none'
-            }}></div>
-        </div>
+        <>
+            {
+                /*visiblePhotoContent.photo?.photoId != photo.photoId && !visiblePhotoContent.isVisible &&*/
+                <div style={{ width: photo.width, height: photo.height }}
+                    onClick={() => click()}
+                    className="html-image-container">
+                    <div ref={imageRef} className="html-image" style={{
+                        backgroundImage: `url(${fetchPhoto(photo.photoId)})`,
+                        backgroundSize: 'contain',
+                        viewTransitionName: 'a' + photo.photoId
+                    }}>
+
+                    </div>
+                </div>
+            }
+        </>
+
     )
 }

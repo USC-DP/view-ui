@@ -3,7 +3,6 @@ import MapView from "@/components/dashboard/map-view";
 import PageViewButton from "@/components/dashboard/page-view-button";
 import PhotoList from "@/components/dashboard/photo-list";
 import Searchbar from "@/components/dashboard/searchbar";
-import { FullImageDisplay } from "@/components/photo-display/full-image-display";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { Box } from "@mui/material";
 import React from "react";

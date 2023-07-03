@@ -12,39 +12,40 @@ import { fetchPhoto } from "@/hooks/fetch-photo";
 import { useRouter } from "next/router";
 import { ViewablePhotosContext } from "@/contexts/viewable-photos-context";
 import { PreviousContentContext } from "@/contexts/previous-content-context";
+//import useViewTransitionRouter from "@/transition-lib/use-transition-router";
 
 const fetcher = (id: string) => fetchPhotos(id).then((d) => { return d })
 
 export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][] }*/) {
 
-    const router = useRouter();
+    //const router = useViewTransitionRouter();
 
-    const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
+    const { setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
     const { viewablePhotos, setViewablePhotos } = React.useContext(ViewablePhotosContext);
 
-    const { previousContent, setPreviousContent } = React.useContext(PreviousContentContext);
+    const { previousContent } = React.useContext(PreviousContentContext);
 
     //const [windowSize, setWindowSize] = React.useState<window>();
 
     const { data, error, isLoading } = useSWR("095785b9-d07b-4307-9e7f-c16eae55526a", fetcher)
 
-    const viewPhoto = async (photoId: string) => {
+    const viewPhoto = (photoId: string) => {
 
-        await fetchPhotoData(photoId).then(
-            (d) => {
-                setVisiblePhotoContent((i) => ({
-                    ...i,
-                    isVisible: true,
-                    photo: d,
-                }))
-            }
-        )
-        //window.history.pushState(null, '', "/dashboard");
-
-        //window.history.pushState(null, '', "/view/" + photoId);
         //@ts-ignore
-        document.startViewTransition(() => router.push("/view/" + photoId))      
+        /*document.startViewTransition(async () => {
+            fetchPhotoData(photoId).then(
+                (d) => {
+                    setVisiblePhotoContent((i) => ({
+                        ...i,
+                        isVisible: true,
+                        photo: d,
+                    }))
+                }
+            )
+        })*/
+        
+        //router.push("/view/" + photoId);
     }
 
     React.useEffect(() => {
@@ -63,8 +64,10 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 width: window.innerWidth,
                 height: window.innerHeight,
             });*/
-            
-            if (data && viewablePhotos.photoRows.length == 0) {
+            console.log(viewablePhotos);
+
+            if (data && viewablePhotos.photoRows.length < 10) {
+                console.log("loaded data");
                 let htmlPhotoRowsData = naiveLayout(data, window.innerWidth - 200);
                 setViewablePhotos((i) => ({
                     ...i,
@@ -82,7 +85,6 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
 
     }, [data]); // Empty array ensures that effect is only run on mount
 
-
     return (
         <>
             <Typography sx={{ fontSize: '24px' }}>Big Sur</Typography>
@@ -92,10 +94,8 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 display: 'flex',
                 flexWrap: 'wrap'
             }}>
-                {/*
-                    viewablePhotos && viewablePhotos.photoRows.map((i: HtmlPhoto) => {
-                        return <ImageListItem photo={i} key={i.photoId} viewPhoto={viewPhoto}></ImageListItem>
-                    })*/
+                {/*<ImageListItem photo={{ photoId: "421d99a7-b4c8-46e7-940b-1020f4c3fc9b", width: 500, height: 200 }} viewPhoto={viewPhoto}></ImageListItem>*/}
+                {
                     viewablePhotos.photoRows && viewablePhotos.photoRows.map((photoRow) => {
                         return (
                             <Box sx={{ display: 'inline' }} key={photoRow.id}>
