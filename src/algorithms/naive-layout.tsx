@@ -4,29 +4,35 @@ import { HtmlPhotoRow } from "@/models/photo-display";
 let maxHeight = 150;
 
 
+function getWidth(width: number, height: number) {
+
+    return Math.round((maxHeight / height) * width) + Math.random() * 80
+}
+
+
 export function naiveLayout(photos: HtmlPhoto[], viewPortWidth: number) {
     let rows: HtmlPhotoRow[] = [];
     let row: HtmlPhoto[] = [];
     let currentWidth = 0;
     let id = 0;
-    photos.forEach(photo => {
-        row.push(photo);
-        photo.width = Math.round((maxHeight / photo.height) * photo.width);
+    photos.forEach((photo, i) => {
+        photo.width = getWidth(photo.width, photo.height);
         photo.height = maxHeight;
         currentWidth += photo.width + 5;
 
-        if (currentWidth >= viewPortWidth) {
-            rows.push({row: row, id: id});
+        row.push(photo);
+
+        if (i + 1 < photos.length && getWidth(photos[i].width, photos[i].height) + currentWidth + 5 > viewPortWidth) {
+            
+            rows.push({ row: row, id: id });
             row = [];
             currentWidth = 0;
             id += 1;
-
         }
     });
 
-    for (let i = 0; i < 500000000; i++) {
-
-    }
-    row.length && rows.push({row: row, id: id});
+    row.length && rows.push({ row: row, id: id });
+    
+    console.log(rows)
     return rows;
 }

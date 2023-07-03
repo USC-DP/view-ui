@@ -23,7 +23,8 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
   });
 
   const [viewablePhotos, setViewablePhotos] = React.useState({
-    photoRows: []
+    photoRows: [],
+    width: 0
   });
 
   const [previousContent, setPreviousContent] = React.useState({

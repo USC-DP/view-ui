@@ -59,8 +59,10 @@ export default function ImageListItem({ photo, viewPhoto }: { photo: HtmlPhoto, 
                     className="html-image-container">
                     <div ref={imageRef} className="html-image" style={{
                         backgroundImage: `url(${fetchPhoto(photo.photoId)})`,
-                        backgroundSize: 'contain',
-                        viewTransitionName: 'a' + photo.photoId
+                        viewTransitionName: 'a' + photo.photoId,
+                        backgroundSize: `${photo.width}px, ${photo.height}px`,
+                        backgroundPosition: 'center center',
+                        minWidth: photo.width
                     }}>
 
                     </div>

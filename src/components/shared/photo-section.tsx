@@ -26,7 +26,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
 
     const { previousContent } = React.useContext(PreviousContentContext);
 
-    //const [windowSize, setWindowSize] = React.useState<window>();
+    //const [windowSize, setWindowSize] = React.useState<Window>();
 
     const { data, error, isLoading } = useSWR("095785b9-d07b-4307-9e7f-c16eae55526a", fetcher)
 
@@ -44,7 +44,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                 }
             )
         })*/
-        
+
         //router.push("/view/" + photoId);
     }
 
@@ -66,19 +66,21 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
             });*/
             console.log(viewablePhotos);
 
-            if (data && viewablePhotos.photoRows.length < 10) {
-                console.log("loaded data");
-                let htmlPhotoRowsData = naiveLayout(data, window.innerWidth - 200);
+            let viewWidth = window.innerWidth - 150;
+
+            if (data && viewWidth != viewablePhotos.width) {
+                let htmlPhotoRowsData = naiveLayout(data.slice(0, 4), viewWidth);
                 setViewablePhotos((i) => ({
                     ...i,
-                    photoRows: htmlPhotoRowsData
+                    photoRows: htmlPhotoRowsData,
+                    width: viewWidth
                 }))
             }
 
         }
 
         // Add event listener
-        //window.addEventListener("resize", handleResize);
+        window.addEventListener("resize", handleResize);
 
         // Call handler right away so state gets updated with initial window size
         handleResize();
@@ -91,22 +93,23 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
             <Typography sx={{ fontSize: '18px' }}>Mon, May 24</Typography>
 
             <div style={{
-                display: 'flex',
-                flexWrap: 'wrap'
+
             }}>
                 {/*<ImageListItem photo={{ photoId: "421d99a7-b4c8-46e7-940b-1020f4c3fc9b", width: 500, height: 200 }} viewPhoto={viewPhoto}></ImageListItem>*/}
                 {
                     viewablePhotos.photoRows && viewablePhotos.photoRows.map((photoRow) => {
                         return (
-                            <Box sx={{ display: 'inline' }} key={photoRow.id}>
-                                {
-                                    photoRow.row.map((photo) => {
-                                        return (
-                                            <ImageListItem photo={photo} key={photo.photoId} viewPhoto={viewPhoto}></ImageListItem>
-                                        )
-                                    })
-                                }
-                            </Box>
+                            <div key={photoRow.id + "a"}>
+                                <Box sx={{ display: 'flex' }} key={photoRow.id}>
+                                    {
+                                        photoRow.row.map((photo) => {
+                                            return (
+                                                <ImageListItem photo={photo} key={photo.photoId} viewPhoto={viewPhoto}></ImageListItem>
+                                            )
+                                        })
+                                    }
+                                </Box>
+                            </div>
                         )
                     })
                 }

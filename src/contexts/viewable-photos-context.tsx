@@ -3,6 +3,7 @@ import React from "react"
 
 export type ViewablePhotosType = {
     photoRows: HtmlPhotoRow[];
+    width: number
 }
 
 export const ViewablePhotosContext = React.createContext<{
@@ -10,7 +11,8 @@ export const ViewablePhotosContext = React.createContext<{
     setViewablePhotos: React.Dispatch<React.SetStateAction<ViewablePhotosType>>;
 }>({
     viewablePhotos: {
-        photoRows: []
+        photoRows: [],
+        width: 0
     },
     setViewablePhotos: () => { },
 
