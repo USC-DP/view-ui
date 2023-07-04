@@ -32,7 +32,6 @@ export function naiveLayout(photos: HtmlPhoto[], viewPortWidth: number) {
     });
 
     row.length && rows.push({ row: row, id: id });
-    
-    console.log(rows)
+
     return rows;
 }

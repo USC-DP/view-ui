@@ -13,15 +13,15 @@ import { flushSync } from "react-dom";
 import useViewTransitionRouter from "@/transition-lib/use-transition-router";
 //import useViewTransitionRouter from "@/transition-lib/use-transition-router";
 
-export default function ImageListItem({ photo, viewPhoto }: { photo: HtmlPhoto, viewPhoto: (photoId: string) => void }) {
+export default function ImageListItem({ photo }: { photo: HtmlPhoto }) {
 
     const imageRef = React.useRef<HTMLDivElement>(null);
 
     const router = useViewTransitionRouter();
 
-    const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
+    const { setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
-    const { previousContent, setPreviousContent } = React.useContext(PreviousContentContext);
+    const { setPreviousContent } = React.useContext(PreviousContentContext);
 
     const [clicked, setClicked] = React.useState<boolean>(false);
 
@@ -31,7 +31,6 @@ export default function ImageListItem({ photo, viewPhoto }: { photo: HtmlPhoto, 
         flushSync(() => {
             if (imageRef.current) {
                 //@ts-ignore
-                //imageRef.current.style.viewTransitionName = "image";
                 setPreviousContent((i) => ({
                     ...i,
                     scrollPosition: window.scrollY,

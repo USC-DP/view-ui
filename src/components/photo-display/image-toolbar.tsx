@@ -19,6 +19,23 @@ export function ImageToolbar({ drawerOpen, setDrawerOpen }: { drawerOpen: boolea
 
     const router = useViewTransitionRouter();
 
+    React.useEffect(() => {
+        const handleKeyPress = (event: KeyboardEvent) => {
+            if (event.key === 'i') {
+                setDrawerOpen((i) => !i);
+            }
+            else if (event.key === "Escape") {
+                click();
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        }
+    }, [])
+
 
     function click() {
         router.push("/dashboard/");

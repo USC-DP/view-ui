@@ -16,37 +16,14 @@ import { PreviousContentContext } from "@/contexts/previous-content-context";
 
 const fetcher = (id: string) => fetchPhotos(id).then((d) => { return d })
 
-export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][] }*/) {
+export default function PhotoSection() {
 
-    //const router = useViewTransitionRouter();
-
-    const { setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
     const { viewablePhotos, setViewablePhotos } = React.useContext(ViewablePhotosContext);
 
     const { previousContent } = React.useContext(PreviousContentContext);
 
-    //const [windowSize, setWindowSize] = React.useState<Window>();
-
     const { data, error, isLoading } = useSWR("095785b9-d07b-4307-9e7f-c16eae55526a", fetcher)
-
-    const viewPhoto = (photoId: string) => {
-
-        //@ts-ignore
-        /*document.startViewTransition(async () => {
-            fetchPhotoData(photoId).then(
-                (d) => {
-                    setVisiblePhotoContent((i) => ({
-                        ...i,
-                        isVisible: true,
-                        photo: d,
-                    }))
-                }
-            )
-        })*/
-
-        //router.push("/view/" + photoId);
-    }
 
     React.useEffect(() => {
         window.scrollTo(0, previousContent.scrollPosition)
@@ -104,7 +81,7 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                                     {
                                         photoRow.row.map((photo) => {
                                             return (
-                                                <ImageListItem photo={photo} key={photo.photoId} viewPhoto={viewPhoto}></ImageListItem>
+                                                <ImageListItem photo={photo} key={photo.photoId}></ImageListItem>
                                             )
                                         })
                                     }
@@ -114,24 +91,6 @@ export default function PhotoSection(/*{ photoRows }: { photoRows: HtmlPhoto[][]
                     })
                 }
             </div>
-
-            {/*
-                memoizedPhotoRows && memoizedPhotoRows.map((item, rIdx) => {
-                    return (
-                        <Box sx={{ display: 'inline' }} key={item.id}>
-                            {
-                                item.row.map((photo, pIdx) => {
-                                    return (
-                                        <ImageListItem photo={photo} key={photo.photoId}></ImageListItem>
-                                    )
-                                })
-                            }
-                            <br />
-                        </Box>
-                    )
-                })
-            */}
-
         </>
     )
 }
