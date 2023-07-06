@@ -25,10 +25,6 @@ export default function PhotoSection() {
 
     const { data, error, isLoading } = useSWR("095785b9-d07b-4307-9e7f-c16eae55526a", fetcher)
 
-    React.useEffect(() => {
-        window.scrollTo(0, previousContent.scrollPosition)
-    }, [])
-
 
 
 

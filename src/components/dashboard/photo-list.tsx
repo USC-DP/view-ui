@@ -3,6 +3,7 @@ import PhotoSection from "../shared/photo-section";
 import { fetchSections } from "@/hooks/fetch-sections";
 import { Section, config } from "@/models/photo-display";
 import MediaSection from "../shared/media-section";
+import { PreviousContentContext } from "@/contexts/previous-content-context";
 
 interface Dictionary {
     [key: string]: {
@@ -17,6 +18,8 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
     const [sections, setSections] = React.useState<Section[]>([]);
     const [visibleSections, setVisibleSections] = React.useState<Dictionary>({});
 
+    const { previousContent } = React.useContext(PreviousContentContext);
+
     const mediaSectionRef = React.useRef<any>();
 
     function updateSectionHeight(sectionId: string, newHeight: number): void {
@@ -25,7 +28,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
         const heightDelta = newHeight - prevHeight;
 
-        console.log(sectionId + " " + prevHeight + " " + newHeight + " started");
+        //console.log(sectionId + " " + prevHeight + " " + newHeight + " started");
         if (heightDelta == 0) {
             return;
         }
@@ -118,12 +121,11 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
                     setVisibleSections(newVisibleSections);
                     setSections(d);
-                    console.log("vsible sections set");
+                    //console.log("vsible sections set");
+                    //window.scrollBy(0, previousContent.scrollPosition);
 
                 }
             )
-
-        //window.scrollTo({ top: 10000 });
     }, [])
 
     React.useEffect(() => {
@@ -140,7 +142,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
     function estimateSectionHeight(section: Section) {
         const unwrappedWidth = (3 / 2) * section.totalMedia * config.targetRowHeight * (7 / 10);
-        const rows = Math.ceil(unwrappedWidth / config.containerWidth);
+        const rows = Math.ceil(unwrappedWidth / (window.innerWidth - 175));
         const height = rows * config.targetRowHeight;
 
         return height;
@@ -152,7 +154,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
             {
                 visibleSections && sections && sections.map((i, index) => {
                     return (
-                        <MediaSection key={i.sectionId} width={config.containerWidth} top={visibleSections[i.sectionId].top} height={visibleSections[i.sectionId].height} section={i} visible={visibleSections[i.sectionId].isVisible} updateSectionHeight={updateSectionHeight}></MediaSection>
+                        <MediaSection key={i.sectionId} width={window.innerWidth - 175} top={visibleSections[i.sectionId].top} height={visibleSections[i.sectionId].height} section={i} visible={visibleSections[i.sectionId].isVisible} updateSectionHeight={updateSectionHeight}></MediaSection>
                     )
                 }
                 )

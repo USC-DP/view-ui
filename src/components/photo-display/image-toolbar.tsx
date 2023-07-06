@@ -38,7 +38,16 @@ export function ImageToolbar({ drawerOpen, setDrawerOpen }: { drawerOpen: boolea
 
 
     function click() {
-        router.push("/dashboard/");
+        document.startViewTransition(() => {
+            flushSync(() => {
+                setVisiblePhotoContent((i) => ({
+                    isVisible: false,
+                    photo: null
+                }))
+            })
+        })
+
+        //router.push("/dashboard/");
     }
 
     return (

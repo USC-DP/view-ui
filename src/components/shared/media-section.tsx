@@ -1,5 +1,5 @@
 import { fetchSegments } from "@/hooks/fetch-segment";
-import { MediaBox, Section, Segment, config } from "@/models/photo-display";
+import { MediaBox, Section, ViewSegment, config } from "@/models/photo-display";
 import React from "react";
 import MediaSegment from "./media-segment";
 
@@ -12,7 +12,7 @@ interface SegmentPosType {
 
 export default function MediaSection({ width, height, section, visible, top, updateSectionHeight }: { width: number, height: number, section: Section, visible: boolean, top: number, updateSectionHeight: (sectionId: string, newHeight: number) => void }) {
 
-    const [segments, setSegments] = React.useState<Segment[]>([]);
+    const [segments, setSegments] = React.useState<ViewSegment[]>([]);
     const sectionRef = React.useRef<HTMLDivElement>(null);
 
     const [mediaBoxes, setMediaBoxes] = React.useState<MediaBox[][]>([]);

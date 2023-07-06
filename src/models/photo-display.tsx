@@ -22,22 +22,10 @@ export interface Section {
 }
 
 export const config = {
-    containerWidth: 1728, //1325
+    containerWidth: 500, //1325
     targetRowHeight: 150
 }
 
-export interface MetaDataType {
-    width: number,
-    height: number
-}
-export interface ImageType {
-    imageId: string
-    metadata: MetaDataType
-}
-export interface Segment {
-    segmentId: string,
-    media: ImageType[]
-}
 
 export interface MediaBox {
     aspectRatio: number,
@@ -45,4 +33,25 @@ export interface MediaBox {
     width: number,
     height: number,
     left: number
+}
+
+export interface ViewMediaMetadata  {
+    testMediaId: string,
+    width: number,
+    height: number
+}
+
+export interface ViewMedia {
+    mediaId: string,
+    metadata: ViewMediaMetadata
+}
+
+export interface ViewSegment {
+    segmentId: string,
+    media: ViewMedia[]
+}
+
+export interface ViewSection {
+    sectionId: string
+    totalMedia: number
 }
