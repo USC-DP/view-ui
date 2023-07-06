@@ -25,36 +25,36 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
         const heightDelta = newHeight - prevHeight;
 
-        console.log(heightDelta)
+        console.log(sectionId + " " + prevHeight + " " + newHeight + " started");
         if (heightDelta == 0) {
             return;
         }
+        setVisibleSections(prevVisibleSections => {
+            const newVisibleSections = { ...prevVisibleSections };
 
-        let newVisibleSections: Dictionary = { ...visibleSections }
+            newVisibleSections[sectionId] = {
+                ...newVisibleSections[sectionId],
+                height: newHeight
+            };
 
-        newVisibleSections[sectionId] = {
-            ...newVisibleSections[sectionId],
-            height: newHeight
-        }
-
-        for (let i = 0; i < sections.length; i++) {
-            if (sections[i].sectionId == sectionId) {
-                for (let j = i + 1; j < sections.length; j++) {
-                    newVisibleSections[sections[j].sectionId] = {
-                        ...newVisibleSections[sections[j].sectionId],
-                        top: newVisibleSections[sections[j].sectionId].top + heightDelta
+            for (let i = 0; i < sections.length; i++) {
+                if (sections[i].sectionId === sectionId) {
+                    for (let j = i + 1; j < sections.length; j++) {
+                        newVisibleSections[sections[j].sectionId] = {
+                            ...newVisibleSections[sections[j].sectionId],
+                            top: newVisibleSections[sections[j].sectionId].top + heightDelta
+                        };
                     }
                 }
             }
+
+            return newVisibleSections;
+        });
+
+        if (window.scrollY > visibleSections[sectionId].top) {
+            window.scrollBy(0, heightDelta);
         }
-
-
-
-
-
-        setVisibleSections(newVisibleSections);
-
-        
+        //console.log(newVisibleSections);
     }
 
 
@@ -100,9 +100,6 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
                 d => {
 
                     let newVisibleSections: Dictionary = {}
-                    /*d.forEach((section: any) => {
-                        newVisibleSections[section.sectionId] = {...newVisibleSections[section.sectionId], isVisible: false};
-                    });*/
 
 
                     let sectionMargin = 80;
@@ -121,11 +118,12 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
                     setVisibleSections(newVisibleSections);
                     setSections(d);
+                    console.log("vsible sections set");
 
                 }
             )
 
-        window.scrollTo(0, 10000);
+        //window.scrollTo({ top: 10000 });
     }, [])
 
     React.useEffect(() => {

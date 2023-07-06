@@ -27,11 +27,11 @@ export default function MediaSection({ width, height, section, visible, top, upd
         fetchSegments(section.sectionId)
             .then(
                 d => {
-                    if (sectionRef.current) {
-                        sectionRef.current.style.height = '100%';
-                    }
+                    /*if (sectionRef.current) {
+                        sectionRef.current.style.height = '27px';
+                    }*/
                     
-                    let segmentMargin = 0;
+                    let segmentMargin = 20;
                     let prevSegmentEnd = 20;
                     let segmentPosTemp: SegmentPosType[] = [];
                     let mediaBoxesTemp: MediaBox[][] = [];
@@ -52,7 +52,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
                         );
                         prevSegmentEnd += layout.containerHeight + segmentMargin;
                     }
-                    console.log(segmentPosTemp);
+                    //console.log(prevSegmentEnd);
                     updateSectionHeight(section.sectionId, prevSegmentEnd);
 
                     setSegments(d);
@@ -77,6 +77,10 @@ export default function MediaSection({ width, height, section, visible, top, upd
             }
         }
     }, [visible, sectionRef])
+
+    /*React.useEffect(() => {
+        console.log(section.sectionId + " " + top + " " + height);
+    }, [height, section, top])*/
 
     return (
         <div ref={sectionRef} className="section" id={section.sectionId} style={{ width: width, height: height, position: 'absolute', top: `${top}px`, backgroundColor: 'blueviolet' }}>
