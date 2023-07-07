@@ -1,7 +1,7 @@
-import { fetchSegments } from "@/hooks/fetch-segment";
 import { MediaBox, Section, ViewMedia, ViewSegment } from "@/models/photo-display";
 import React from "react";
 import MediaSegment from "./media-segment";
+import api from "@/api/api";
 
 var justifiedLayout = require('justified-layout')
 
@@ -24,7 +24,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
       
 
     function populateSegments() {
-        fetchSegments(section.sectionId)
+        api.fetchSegments(section.sectionId)
             .then(
                 d => {
                     let segmentMargin = 20;

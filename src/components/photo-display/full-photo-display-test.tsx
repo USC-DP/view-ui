@@ -1,5 +1,5 @@
+import api from "@/api/api";
 import { VisiblePhotoContentType } from "@/contexts/visible-photo-context";
-import { fetchPhoto } from "@/hooks/fetch-photo";
 import Image from "next/image";
 
 export default function FullPhotoDsiplay({ data, setData }: { data: VisiblePhotoContentType, setData: React.Dispatch<React.SetStateAction<VisiblePhotoContentType>> }) {
@@ -8,7 +8,7 @@ export default function FullPhotoDsiplay({ data, setData }: { data: VisiblePhoto
 
             {data && data.photo && <Image
                 unoptimized={true}
-                src={fetchPhoto(data.photo.photoId)}
+                src={api.fetchPhotoUrl(data.photo.photoId)}
                 width={0} height={0} sizes="100vw"
                 className={`image`}
                 alt=""

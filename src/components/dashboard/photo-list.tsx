@@ -1,8 +1,8 @@
 import React from "react";
-import { fetchSections } from "@/hooks/fetch-sections";
 import { Section, config } from "@/models/photo-display";
 import MediaSection from "../shared/media-section";
 import { PreviousContentContext } from "@/contexts/previous-content-context";
+import api from "@/api/api";
 
 interface Dictionary {
     [key: string]: {
@@ -119,7 +119,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
     }
 
     React.useEffect(() => {
-        fetchSections()
+        api.fetchSections()
             .then(
                 d => {
 

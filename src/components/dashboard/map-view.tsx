@@ -2,7 +2,7 @@ import React, { MutableRefObject } from "react";
 import mapboxgl from 'mapbox-gl';
 import './styles/map.css'
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { fetchPhotoGeoData } from "@/hooks/fetchPhotoGeoData";
+import api from "@/api/api";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string;
 
@@ -25,7 +25,7 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
             zoom: zoom
         });
 
-        fetchPhotoGeoData("095785b9-d07b-4307-9e7f-c16eae55526a")
+        api.fetchPhotoGeoData("095785b9-d07b-4307-9e7f-c16eae55526a")
             .then((d) => {
                 map.current.on('load', () => {
                     // Add an image to use as a custom marker

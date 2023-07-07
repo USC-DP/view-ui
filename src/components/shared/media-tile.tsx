@@ -1,7 +1,6 @@
+import api from "@/api/api";
 import { PreviousContentContext } from "@/contexts/previous-content-context";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
-import { fetchPhoto } from "@/hooks/fetch-photo";
-import { fetchPhotoData } from "@/hooks/fetch-photo-data";
 import { MediaBox, ViewMedia } from "@/models/photo-display";
 import useViewTransitionRouter from "@/transition-lib/use-transition-router";
 import React from "react";
@@ -56,13 +55,13 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                     onClick={() => click()}
                     style={{
                         position: 'absolute',
-                        //backgroundColor: 'yellow',
+                        backgroundColor: 'grey',
                         cursor: 'pointer',
                         height: `${mediaBox.height}px`,
                         width: `${mediaBox.width}px`,
                         top: `${mediaBox.top}px`,
                         left: `${mediaBox.left}px`,
-                        backgroundImage: `url(${fetchPhoto(media.mediaId)})`,
+                        backgroundImage: `url(${api.fetchPhotoUrl(media.mediaId)})`,
                         backgroundSize: 'contain',
                         viewTransitionName: media.mediaId === previousContent.photoId ? "i" : 'none'
                     }}></div>

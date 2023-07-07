@@ -3,12 +3,12 @@ import { HtmlPhoto } from '@/models/photo-display';
 import { ImageToolbar } from './image-toolbar';
 import './styles/full-image-display.css'
 import Image from "next/image";
-import { fetchPhoto } from '@/hooks/fetch-photo';
 import React from 'react';
 import { Box, Button, Typography, styled, useTheme } from '@mui/material';
 import { VisiblePhotoContentType, VisiblePhotoContext } from '@/contexts/visible-photo-context';
 import { relative } from 'path';
 import { PreviousContentContext } from '@/contexts/previous-content-context';
+import api from '@/api/api';
 
 
 export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContentType, setData?: React.Dispatch<React.SetStateAction<VisiblePhotoContentType>> }) {
@@ -44,7 +44,7 @@ export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContent
                                 &&
                                 <Image
                                     unoptimized={true}
-                                    src={fetchPhoto(visiblePhotoContent.photo.photoId)}
+                                    src={api.fetchPhotoUrl(visiblePhotoContent.photo.photoId)}
                                     width={0} height={0} sizes="100vw"
                                     className={`image`}
                                     alt=""
