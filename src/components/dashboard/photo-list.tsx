@@ -17,20 +17,20 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
     const [sections, setSections] = React.useState<Section[]>([]);
     const [visibleSections, setVisibleSections] = React.useState<Dictionary>({});
 
-    const [elementWidth, setElementWidth] = React.useState<number>(0);
+    const [elementWidth, setElementWidth] = React.useState<number>(10000);
     const elementRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
 
         const handleResize = () => {
             if (elementRef.current) {
-                setElementWidth(elementRef.current.clientWidth);
+                setElementWidth(elementRef.current.clientWidth - 25);
           }
         };
     
         // Initial width on component mount
         if (elementRef.current) {
-          setElementWidth(elementRef.current.clientWidth);
+          setElementWidth(elementRef.current.clientWidth - 25);
         }
     
         // Update width on window resize

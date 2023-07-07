@@ -27,7 +27,6 @@ export default function MediaSection({ width, height, section, visible, top, upd
         fetchSegments(section.sectionId)
             .then(
                 d => {
-
                     let segmentMargin = 20;
                     let prevSegmentEnd = 20;
                     let segmentPosTemp: SegmentPosType[] = [];
@@ -86,7 +85,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
     }, [height, section, top])*/
 
     return (
-        <div ref={sectionRef} className="section" id={section.sectionId} style={{ width: width, height: height, position: 'absolute', top: `${top}px`, backgroundColor: 'blueviolet' }}>
+        <div ref={sectionRef} className="section" id={section.sectionId} style={{ width: width, height: height, position: 'absolute', top: `${top}px`, /*backgroundColor: 'blueviolet'*/ }}>
             {
                 fullyInitialized && segmentPoses && mediaBoxes && segments.length > 0 && segments.map((i, index) => {
                     return (
