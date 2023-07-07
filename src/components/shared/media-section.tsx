@@ -27,9 +27,6 @@ export default function MediaSection({ width, height, section, visible, top, upd
         fetchSegments(section.sectionId)
             .then(
                 d => {
-                    /*if (sectionRef.current) {
-                        sectionRef.current.style.height = '100%';
-                    }*/
 
                     let segmentMargin = 20;
                     let prevSegmentEnd = 20;
@@ -37,7 +34,13 @@ export default function MediaSection({ width, height, section, visible, top, upd
                     let mediaBoxesTemp: MediaBox[][] = [];
                     for (const segment of d) {
                         const sizes = segment.media.map((image: ViewMedia) => ({width: image.width, height: image.height}));
-                        let layout = justifiedLayout(sizes, {containerWidth: window.innerWidth - 200, targetRowHeight: 150});
+                        let layout = justifiedLayout(sizes, {
+                            boxSpacing: 2,
+                            containerPadding: 0,
+                            targetRowHeightTolerance: 0.15,
+                            containerWidth: window.innerWidth - 200,
+                            targetRowHeight: 150
+                        });
                         
                         segmentPosTemp.push(
                         (

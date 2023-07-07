@@ -14,22 +14,24 @@ export default function Dashboard() {
 
 
     return (
-            
-            
-                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: '10px', md: 0 }, m: '1em', alignItems: 'center', flexWrap: 'none' }}>
-
-                        <PageViewButton pageView={pageView} onPageViewChange={onPageViewChange} />
-
-                        <Searchbar />
-
-                    </Box>
 
 
-                    {<PhotoList isVisible={pageView == 'list'}></PhotoList>}
-                    {<MapView isVisible={pageView == 'map'}></MapView>}
-                    {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+            <div style={{position: 'sticky'}}>
+                <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: '10px', md: 0 }, m: '1em', alignItems: 'center', flexWrap: 'none' }}>
 
-                </div>
+                    <PageViewButton pageView={pageView} onPageViewChange={onPageViewChange} />
+
+                    <Searchbar />
+
+                </Box>
+            </div>
+
+
+            {<PhotoList isVisible={pageView == 'list'}></PhotoList>}
+            {<MapView isVisible={pageView == 'map'}></MapView>}
+            {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
+
+        </div>
     )
 }

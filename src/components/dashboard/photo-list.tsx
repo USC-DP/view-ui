@@ -1,5 +1,4 @@
 import React from "react";
-import PhotoSection from "../shared/photo-section";
 import { fetchSections } from "@/hooks/fetch-sections";
 import { Section, config } from "@/models/photo-display";
 import MediaSection from "../shared/media-section";
@@ -121,8 +120,6 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
                     setVisibleSections(newVisibleSections);
                     setSections(d);
-                    //console.log("vsible sections set");
-                    //window.scrollBy(0, previousContent.scrollPosition);
 
                 }
         )
