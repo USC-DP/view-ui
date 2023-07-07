@@ -13,29 +13,30 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
 
     const imageRef = React.useRef<HTMLDivElement>(null);
 
-    const { setPreviousContent } = React.useContext(PreviousContentContext);
+    const { previousContent, setPreviousContent } = React.useContext(PreviousContentContext);
     const {visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
     const [clicked, setClicked] = React.useState<boolean>(false);
 
     function click() {
+        setPreviousContent((i) => ({
+            ...i,
+            scrollPosition: window.scrollY,
+            photoId: media.mediaId
+        }));
+
         document.startViewTransition(() => {
             flushSync(() => {
                 if (imageRef.current) {
                     //@ts-ignore
-                    setPreviousContent((i) => ({
-                        ...i,
-                        scrollPosition: window.scrollY,
-                        photoId: media.metadata.testMediaId
-                    }));
     
     
                     setVisiblePhotoContent((prev) => ({
                         ...prev,
                         isVisible: true,
                         photo: {
-                            photoId: media.metadata.testMediaId,
-                            width: media.metadata.height,
-                            height: media.metadata.height
+                            photoId: media.mediaId,
+                            width: media.height,
+                            height: media.height
                         }
                     }))
                 }
@@ -49,7 +50,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
     return (
         <>
             {
-                !visiblePhotoContent.isVisible && visiblePhotoContent.photo?.photoId !== media.metadata.testMediaId && 
+                !visiblePhotoContent.isVisible && visiblePhotoContent.photo?.photoId !== media.mediaId && 
                 <div
                     ref={imageRef}
                     onClick={() => click()}
@@ -60,9 +61,9 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                         width: `${mediaBox.width}px`,
                         top: `${mediaBox.top}px`,
                         left: `${mediaBox.left}px`,
-                        backgroundImage: `url(${fetchPhoto(media.metadata.testMediaId)})`,
+                        backgroundImage: `url(${fetchPhoto(media.mediaId)})`,
                         backgroundSize: 'contain',
-                        viewTransitionName: 'a' + media.metadata.testMediaId
+                        viewTransitionName: media.mediaId === previousContent.photoId ? "i" : 'none'
                     }}></div>
             }
         </>

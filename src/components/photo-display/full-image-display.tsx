@@ -49,7 +49,7 @@ export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContent
                                     className={`image`}
                                     alt=""
                                     style={{
-                                        viewTransitionName: 'a' + visiblePhotoContent.photo.photoId
+                                        viewTransitionName: "i"
                                     }}
                                 ></Image>}
                         </div>

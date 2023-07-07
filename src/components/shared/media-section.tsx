@@ -1,5 +1,5 @@
 import { fetchSegments } from "@/hooks/fetch-segment";
-import { MediaBox, Section, ViewSegment, config } from "@/models/photo-display";
+import { MediaBox, Section, ViewMedia, ViewSegment } from "@/models/photo-display";
 import React from "react";
 import MediaSegment from "./media-segment";
 
@@ -28,16 +28,16 @@ export default function MediaSection({ width, height, section, visible, top, upd
             .then(
                 d => {
                     /*if (sectionRef.current) {
-                        sectionRef.current.style.height = '27px';
+                        sectionRef.current.style.height = '100%';
                     }*/
-                    
+
                     let segmentMargin = 20;
                     let prevSegmentEnd = 20;
                     let segmentPosTemp: SegmentPosType[] = [];
                     let mediaBoxesTemp: MediaBox[][] = [];
                     for (const segment of d) {
-                        const sizes = segment.media.map((image: any) => image.metadata);
-                        let layout = justifiedLayout(sizes, config);
+                        const sizes = segment.media.map((image: ViewMedia) => ({width: image.width, height: image.height}));
+                        let layout = justifiedLayout(sizes, {containerWidth: window.innerWidth - 200, targetRowHeight: 150});
                         
                         segmentPosTemp.push(
                         (
@@ -52,10 +52,10 @@ export default function MediaSection({ width, height, section, visible, top, upd
                         );
                         prevSegmentEnd += layout.containerHeight + segmentMargin;
                     }
-                    //console.log(prevSegmentEnd);
                     updateSectionHeight(section.sectionId, prevSegmentEnd);
 
                     setSegments(d);
+
                     setSegmentPoses(segmentPosTemp);
                     setMediaBoxes(mediaBoxesTemp);
 

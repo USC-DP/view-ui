@@ -22,7 +22,7 @@ export interface Section {
 }
 
 export const config = {
-    containerWidth: 500, //1325
+    containerWidth: 1325, //1325
     targetRowHeight: 150
 }
 
@@ -34,16 +34,10 @@ export interface MediaBox {
     height: number,
     left: number
 }
-
-export interface ViewMediaMetadata  {
-    testMediaId: string,
-    width: number,
-    height: number
-}
-
 export interface ViewMedia {
     mediaId: string,
-    metadata: ViewMediaMetadata
+    width: number,
+    height: number
 }
 
 export interface ViewSegment {

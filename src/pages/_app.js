@@ -34,7 +34,6 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     }
 
     return (
-      <div style={{overflow: 'hidden'}}>
         <VisiblePhotoContext.Provider
           value={{ visiblePhotoContent, setVisiblePhotoContent }}
         >
@@ -69,7 +68,6 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
             </PreviousContentContext.Provider>
           </ViewablePhotosContext.Provider>
         </VisiblePhotoContext.Provider>
-      </div>
     );
   };
 

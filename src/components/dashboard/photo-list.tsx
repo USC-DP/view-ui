@@ -125,7 +125,8 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
                     //window.scrollBy(0, previousContent.scrollPosition);
 
                 }
-            )
+        )
+        console.log("loaded");
     }, [])
 
     React.useEffect(() => {
@@ -142,9 +143,8 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
     function estimateSectionHeight(section: Section) {
         const unwrappedWidth = (3 / 2) * section.totalMedia * config.targetRowHeight * (7 / 10);
-        const rows = Math.ceil(unwrappedWidth / (window.innerWidth - 175));
+        const rows = Math.ceil(unwrappedWidth / (window.innerWidth - 200));
         const height = rows * config.targetRowHeight;
-
         return height;
     }
 
@@ -154,7 +154,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
             {
                 visibleSections && sections && sections.map((i, index) => {
                     return (
-                        <MediaSection key={i.sectionId} width={window.innerWidth - 175} top={visibleSections[i.sectionId].top} height={visibleSections[i.sectionId].height} section={i} visible={visibleSections[i.sectionId].isVisible} updateSectionHeight={updateSectionHeight}></MediaSection>
+                        <MediaSection key={i.sectionId} width={window.innerWidth - 200} top={visibleSections[i.sectionId].top} height={visibleSections[i.sectionId].height} section={i} visible={visibleSections[i.sectionId].isVisible} updateSectionHeight={updateSectionHeight}></MediaSection>
                     )
                 }
                 )
