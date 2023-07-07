@@ -57,6 +57,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                     style={{
                         position: 'absolute',
                         //backgroundColor: 'yellow',
+                        cursor: 'pointer',
                         height: `${mediaBox.height}px`,
                         width: `${mediaBox.width}px`,
                         top: `${mediaBox.top}px`,

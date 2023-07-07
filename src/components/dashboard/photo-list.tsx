@@ -17,9 +17,32 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
     const [sections, setSections] = React.useState<Section[]>([]);
     const [visibleSections, setVisibleSections] = React.useState<Dictionary>({});
 
-    const { previousContent } = React.useContext(PreviousContentContext);
+    const [elementWidth, setElementWidth] = React.useState<number>(0);
+    const elementRef = React.useRef<HTMLDivElement>(null);
 
-    const mediaSectionRef = React.useRef<any>();
+    React.useEffect(() => {
+
+        const handleResize = () => {
+            if (elementRef.current) {
+                setElementWidth(elementRef.current.clientWidth);
+          }
+        };
+    
+        // Initial width on component mount
+        if (elementRef.current) {
+          setElementWidth(elementRef.current.clientWidth);
+        }
+    
+        // Update width on window resize
+        window.addEventListener('resize', handleResize);
+    
+        // Cleanup the event listener on component unmount
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+
+      }, []);    
+
 
     function updateSectionHeight(sectionId: string, newHeight: number): void {
 
@@ -56,7 +79,6 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
         if (window.scrollY > visibleSections[sectionId].top) {
             window.scrollBy(0, heightDelta);
         }
-        //console.log(newVisibleSections);
     }
 
 
@@ -122,7 +144,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
                     setSections(d);
 
                 }
-        )
+            )
         console.log("loaded");
     }, [])
 
@@ -140,18 +162,17 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
     function estimateSectionHeight(section: Section) {
         const unwrappedWidth = (3 / 2) * section.totalMedia * config.targetRowHeight * (7 / 10);
-        const rows = Math.ceil(unwrappedWidth / (window.innerWidth - 200));
+        const rows = Math.ceil(unwrappedWidth / (elementWidth));
         const height = rows * config.targetRowHeight;
         return height;
     }
 
     return (
-        <div style={{ display: isVisible ? 'block' : 'none' }}>
-            {/*<PhotoSection></PhotoSection>*/}
+        <div ref={elementRef} style={{ display: isVisible ? 'block' : 'none' }}>
             {
                 visibleSections && sections && sections.map((i, index) => {
                     return (
-                        <MediaSection key={i.sectionId} width={window.innerWidth - 200} top={visibleSections[i.sectionId].top} height={visibleSections[i.sectionId].height} section={i} visible={visibleSections[i.sectionId].isVisible} updateSectionHeight={updateSectionHeight}></MediaSection>
+                        <MediaSection key={i.sectionId} width={elementWidth} top={visibleSections[i.sectionId].top} height={visibleSections[i.sectionId].height} section={i} visible={visibleSections[i.sectionId].isVisible} updateSectionHeight={updateSectionHeight}></MediaSection>
                     )
                 }
                 )

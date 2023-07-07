@@ -10,21 +10,11 @@ interface SegmentPosType {
     top: number
 }
 
-export default function MediaSegment({ segment, mediaBoxes, segmentPos }: { segment: ViewSegment, mediaBoxes: MediaBox[], segmentPos: SegmentPosType }) {
+export default function MediaSegment({ width, segment, mediaBoxes, segmentPos }: { width: number, segment: ViewSegment, mediaBoxes: MediaBox[], segmentPos: SegmentPosType }) {
 
-    
-    React.useEffect(() => {
-        /*const sizes = segment.media.map(image => image.metadata);
-        let layout = justifiedLayout(sizes, config);
-        setContainerHeight(layout.containerHeight)
-        setMediaBoxes(layout.boxes);*/
-        //console.log(segment);
-        //console.log(segmentPos.top);
-
-    }, [])
 
     return (
-        <div className="segment" style={{ position: 'absolute', backgroundColor: 'blue', width: window.innerWidth - 200, height: segmentPos.containerHeight, top: segmentPos.top}}>
+        <div className="segment" style={{ position: 'absolute', backgroundColor: 'blue', width: width, height: segmentPos.containerHeight, top: segmentPos.top}}>
             {segment && mediaBoxes && mediaBoxes.map((i, index) => {
                 return (
                     <MediaTile key={segment.media[index].mediaId} mediaBox={i} media={segment.media[index]}></MediaTile>

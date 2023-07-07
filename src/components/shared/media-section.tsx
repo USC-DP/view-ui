@@ -38,7 +38,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
                             boxSpacing: 2,
                             containerPadding: 0,
                             targetRowHeightTolerance: 0.15,
-                            containerWidth: window.innerWidth - 200,
+                            containerWidth: width,
                             targetRowHeight: 150
                         });
                         
@@ -79,7 +79,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
 
             }
         }
-    }, [visible, sectionRef])
+    }, [visible, sectionRef, width])
 
     /*React.useEffect(() => {
         console.log(section.sectionId + " " + top + " " + height);
@@ -90,7 +90,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
             {
                 fullyInitialized && segmentPoses && mediaBoxes && segments.length > 0 && segments.map((i, index) => {
                     return (
-                        <MediaSegment key={i.segmentId} segment={i} mediaBoxes={mediaBoxes[index]} segmentPos={segmentPoses[index]}></MediaSegment>
+                        <MediaSegment key={i.segmentId} width={width} segment={i} mediaBoxes={mediaBoxes[index]} segmentPos={segmentPoses[index]}></MediaSegment>
                     )
                 }
                 )
