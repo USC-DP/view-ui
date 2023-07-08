@@ -145,7 +145,6 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
                 }
             )
-        console.log("loaded");
     }, [])
 
     React.useEffect(() => {

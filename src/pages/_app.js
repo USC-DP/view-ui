@@ -29,7 +29,7 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
   });
 
   const getContent = () => {
-    if ([`/404`].includes(appProps.router.pathname)) {
+    if ([`/404`, '/login'].includes(appProps.router.pathname)) {
       return <Component {...pageProps} />;
     }
 
