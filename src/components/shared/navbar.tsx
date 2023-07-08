@@ -59,7 +59,7 @@ export default function Navbar() {
 
                 <Box sx={{ mt: { sm: '0', md: 'clamp(0em, 5em, 20vh)' }, transition: 'margin 0.2s' }}>
                     <ListItem disablePadding sx={{ m: 0 }}>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => handleNav('/explore')}>
                             <ListItemIcon sx={{ minWidth: '30px' }}>
                                 <SearchIcon sx={{ color: 'black' }} />
                             </ListItemIcon>
