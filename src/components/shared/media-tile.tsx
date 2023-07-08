@@ -62,7 +62,8 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                         top: `${mediaBox.top}px`,
                         left: `${mediaBox.left}px`,
                         backgroundImage: `url(${api.fetchPhotoUrl(media.mediaId)})`,
-                        backgroundSize: 'contain',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
                         viewTransitionName: media.mediaId === previousContent.photoId ? "i" : 'none'
                     }}></div>
             }
