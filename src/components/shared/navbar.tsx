@@ -25,6 +25,7 @@ export default function Navbar() {
     };
     
     const handleNav = (url: string) => {
+        router.prefetch(url);
         router.push(url)
     }
 

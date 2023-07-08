@@ -4,6 +4,7 @@ export default function Explore() {
     return (
         <>
             <ExploreTrack></ExploreTrack>
+            <ExploreTrack></ExploreTrack>
         </>
     );
 }

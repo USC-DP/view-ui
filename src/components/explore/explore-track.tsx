@@ -56,7 +56,7 @@ export default function ExploreTrack() {
                 setVisibleItems(data.length);
                 return;
             }
-            const itemWidth = Math.max((containerWidth - (newVisibleItems) * 20) / (newVisibleItems), 150);
+            const itemWidth = Math.max((containerWidth - (newVisibleItems - 1) * 20) / (newVisibleItems), 150);
             setVisibleItems(newVisibleItems);
             setElementWidth(itemWidth);
         }
@@ -74,7 +74,10 @@ export default function ExploreTrack() {
 
     return (
         <div style={{ margin: '8px' }}>
-            <Typography fontSize={16} pb={'8px'}>Places</Typography>
+            <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <Typography fontSize={16} pb={'8px'}>Places</Typography>
+                <Typography fontWeight={500} color={'rgb(41, 98, 255)'} fontSize={16} pb={'8px'}>View All</Typography>
+            </Box>
             {<div ref={divRef} style={{ display: 'flex', width: '100%', gap: 20, height: elementWidth, overflow: 'hidden' }}>
                 {
                     data.slice(0, visibleItems).map((i, index) => {
