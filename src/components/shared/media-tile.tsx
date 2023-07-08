@@ -34,7 +34,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                         isVisible: true,
                         photo: {
                             photoId: media.mediaId,
-                            width: media.height,
+                            width: media.width,
                             height: media.height
                         }
                     }))

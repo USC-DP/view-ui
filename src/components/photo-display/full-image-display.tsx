@@ -30,11 +30,11 @@ export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContent
 
     return (
         <>
-            {visiblePhotoContent.isVisible &&
+            {visiblePhotoContent.isVisible && visiblePhotoContent?.photo &&
                 <Box className={`overlay ${visiblePhotoContent.isVisible ? "" : ""}`}>
                     <div className={`background ${visiblePhotoContent.isVisible ? 'background-active' : 'background-active'}`}></div>
 
-                    <ImageToolbar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageToolbar>
+                    <ImageToolbar data={visiblePhotoContent.photo} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageToolbar>
 
                     <Box sx={{ marginRight: { xs: 0, sm: drawerOpen ? '360px' : 0 }, transition: 'margin 0.2s', height: '100%' }}>
 

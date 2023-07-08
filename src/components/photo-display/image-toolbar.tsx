@@ -12,8 +12,9 @@ import Link from "next/link";
 import Photo from "@/pages/view/[id]";
 import { useRouter } from "next/router";
 import useViewTransitionRouter from "@/transition-lib/use-transition-router";
+import { HtmlPhoto } from "@/models/photo-display";
 
-export function ImageToolbar({ drawerOpen, setDrawerOpen }: { drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
+export function ImageToolbar({data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto, drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
@@ -57,7 +58,7 @@ export function ImageToolbar({ drawerOpen, setDrawerOpen }: { drawerOpen: boolea
                     <ArrowBackIcon sx={{ color: 'white' }} />
                 </IconButton>
                 <Box sx={{ flexGrow: 1 }}></Box>
-                <ImageInfo drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageInfo>
+                <ImageInfo data={data} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageInfo>
             </Toolbar>
         </Box>
     );

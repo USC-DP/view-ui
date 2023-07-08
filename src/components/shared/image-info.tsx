@@ -15,6 +15,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
+import { HtmlPhoto } from "@/models/photo-display";
 
 
 const DenseInfoListItem = ({ icon, majorLabel, minorLabel }: { icon: any, majorLabel: string, minorLabel?: string[] }) => {
@@ -39,7 +40,7 @@ const DenseInfoListItem = ({ icon, majorLabel, minorLabel }: { icon: any, majorL
 }
 
 
-export function ImageInfo({ drawerOpen, setDrawerOpen }: { drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
+export function ImageInfo({data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto, drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     const map = React.useRef<any>();
     const mapContainer = React.useRef<any>();
@@ -129,7 +130,7 @@ export function ImageInfo({ drawerOpen, setDrawerOpen }: { drawerOpen: boolean, 
 
                 <DenseInfoListItem icon={<CameraOutlinedIcon />} majorLabel="Google Pixel 3a XL" minorLabel={["ƒ/2", "1/60", "2.51mm", "ISO71"]} />
 
-                <DenseInfoListItem icon={<ImageOutlinedIcon />} majorLabel="PXL_20230521_023815098.jpg" minorLabel={["8MP", "2448 × 3264"]} />
+                <DenseInfoListItem icon={<ImageOutlinedIcon />} majorLabel={data.photoId} minorLabel={["8MP", `${data.width} × ${data.height}`]} />
 
                 <DenseInfoListItem icon={<LocationOnOutlinedIcon />} majorLabel="California" />
 
