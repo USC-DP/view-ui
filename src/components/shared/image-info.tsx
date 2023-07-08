@@ -1,4 +1,4 @@
-import { Box, ListItem, ListItemButton, List, IconButton } from "@mui/material";
+import { Box, ListItem, ListItemButton, List, IconButton, TextField } from "@mui/material";
 import React from "react";
 import Drawer from '@mui/material/Drawer';
 
@@ -7,61 +7,133 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { Typography } from "@mui/joy";
 
+
+import TodayIcon from '@mui/icons-material/Today';
+import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl';
+
+
+const DenseInfoListItem = ({ icon, majorLabel, minorLabel }: { icon: any, majorLabel: string, minorLabel?: string[] }) => {
+    return (
+        <ListItem sx={{ p: '18px 24px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'left', gap: '20px', width: '100%' }}>
+                {icon}
+                <Box>
+                    <Typography fontSize={'16px'}>{majorLabel}</Typography>
+                    {minorLabel &&
+                        <Typography fontSize={'14px'}>
+                            {minorLabel[0]}
+                            {minorLabel.slice(1).map((minorLabelText, index) => {
+                                return <span key={index} style={{ marginLeft: '12px' }}>{minorLabelText}</span>
+                            })}
+                        </Typography>
+                    }
+                </Box>
+            </Box>
+        </ListItem>
+    );
+}
+
+
 export function ImageInfo({ drawerOpen, setDrawerOpen }: { drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
+
+    const map = React.useRef<any>();
+    const mapContainer = React.useRef<any>();
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen);
     };
 
+    React.useEffect(() => {
+        if (map.current) return; // initialize map only once
+        map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-119.890410, 35.212260],
+            zoom: 14
+        });
+
+        map.current.on('load', () => {
+            // Add an image to use as a custom marker
+            map.current.loadImage(
+                'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+                (error: any, image: any) => {
+                    if (error) throw error;
+                    map.current.addImage('custom-marker', image);
+                    // Add a GeoJSON source with 2 points
+                    map.current.addSource('points', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    // feature for Mapbox SF
+                                    'type': 'Feature',
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-119.890410, 35.212260]
+                                    }
+                                }
+                            ]
+                        }
+                    });
+
+                    // Add a symbol layer
+                    map.current.addLayer({
+                        'id': 'points',
+                        'type': 'symbol',
+                        'source': 'points',
+                        'layout': {
+                            'icon-image': 'custom-marker',
+                            // get the title name from the source's "title" property
+                            'text-field': ['get', 'title'],
+                            'text-font': [
+                                'Open Sans Semibold',
+                                'Arial Unicode MS Bold'
+                            ],
+                            'text-offset': [0, 1.25],
+                            'text-anchor': 'top'
+                        }
+                    });
+                }
+            );
+        });
+
+
+    }, [])
+
 
     const drawerContent = (
         <Box sx={{ bgcolor: 'white.paper', height: '100vh', m: 0, overflow: 'none', zIndex: 500 }}>
             <List disablePadding sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <ListItem disablePadding sx={{p: '12px'}}>
+                <ListItem disablePadding sx={{ p: '12px' }}>
                     <IconButton onClick={handleDrawerToggle}>
                         <CloseIcon />
                     </IconButton>
-                    <Typography level="h5">Information</Typography>
+                    <Typography fontSize={'18px'}>Information</Typography>
                 </ListItem>
 
-                <ListItem>
-
-                    <Typography>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique unde
-                        fugit veniam eius, perspiciatis sunt? Corporis qui ducimus quibusdam,
-                        aliquam dolore excepturi quae. Distinctio enim at eligendi perferendis in
-                        cum quibusdam sed quae, accusantium et aperiam? Quod itaque exercitationem,
-                        at ab sequi qui modi delectus quia corrupti alias distinctio nostrum.
-                        Minima ex dolor modi inventore sapiente necessitatibus aliquam fuga et. Sed
-                        numquam quibusdam at officia sapiente porro maxime corrupti perspiciatis
-                        asperiores, exercitationem eius nostrum consequuntur iure aliquam itaque,
-                        assumenda et! Quibusdam temporibus beatae doloremque voluptatum doloribus
-                        soluta accusamus porro reprehenderit eos inventore facere, fugit, molestiae
-                        ab officiis illo voluptates recusandae. Vel dolor nobis eius, ratione atque
-                        soluta, aliquam fugit qui iste architecto perspiciatis. Nobis, voluptatem!
-                        Cumque, eligendi unde aliquid minus quis sit debitis obcaecati error,
-                        delectus quo eius exercitationem tempore. Delectus sapiente, provident
-                        corporis dolorum quibusdam aut beatae repellendus est labore quisquam
-                        praesentium repudiandae non vel laboriosam quo ab perferendis velit ipsa
-                        deleniti modi! Ipsam, illo quod. Nesciunt commodi nihil corrupti cum non
-                        fugiat praesentium doloremque architecto laborum aliquid. Quae, maxime
-                        recusandae? Eveniet dolore molestiae dicta blanditiis est expedita eius
-                        debitis cupiditate porro sed aspernatur quidem, repellat nihil quasi
-                        praesentium quia eos, quibusdam provident. Incidunt tempore vel placeat
-                        voluptate iure labore, repellendus beatae quia unde est aliquid dolor
-                        molestias libero. Reiciendis similique exercitationem consequatur, nobis
-                        placeat illo laudantium! Enim perferendis nulla soluta magni error,
-                        provident repellat similique cupiditate ipsam, et tempore cumque quod! Qui,
-                        iure suscipit tempora unde rerum autem saepe nisi vel cupiditate iusto.
-                        Illum, corrupti? Fugiat quidem accusantium nulla. Aliquid inventore commodi
-                        reprehenderit rerum reiciendis! Quidem alias repudiandae eaque eveniet
-                        cumque nihil aliquam in expedita, impedit quas ipsum nesciunt ipsa ullam
-                        consequuntur dignissimos numquam at nisi porro a, quaerat rem repellendus.
-                        Voluptates perspiciatis, in pariatur impedit, nam facilis libero dolorem
-                        dolores sunt inventore perferendis, aut sapiente modi nesciunt.
-                    </Typography>
+                <ListItem sx={{ p: '16.5px 24px' }}>
+                    <TextField id="standard-basic" placeholder="Add a description" variant="standard" sx={{ width: '100%' }} multiline />
                 </ListItem>
 
+                <ListItem sx={{ p: '14px 24px' }}>
+                    <Typography fontSize={'11px'} fontFamily={'Roboto, Arial, sans-serif'} fontWeight={'550'} textColor="rgb(95,99,104)" letterSpacing={'0.8px'}>DETAILS</Typography>
+                </ListItem>
+
+                <DenseInfoListItem icon={<TodayIcon />} majorLabel="May 20" minorLabel={["Sat, 7:38 PM", "GMT-07:00"]} />
+
+                <DenseInfoListItem icon={<CameraOutlinedIcon />} majorLabel="Google Pixel 3a XL" minorLabel={["ƒ/2", "1/60", "2.51mm", "ISO71"]} />
+
+                <DenseInfoListItem icon={<ImageOutlinedIcon />} majorLabel="PXL_20230521_023815098.jpg" minorLabel={["8MP", "2448 × 3264"]} />
+
+                <DenseInfoListItem icon={<LocationOnOutlinedIcon />} majorLabel="California" />
+
+                <div ref={mapContainer} className="map-container" style={{ maxHeight: '360px' }} />
             </List>
         </Box>
     );
