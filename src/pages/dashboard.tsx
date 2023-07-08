@@ -16,7 +16,7 @@ export default function Dashboard() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
 
-            <div style={{position: 'fixed', width: '100%', zIndex: 500, backgroundColor: 'white'}}>
+            <div style={{position: 'fixed', width: '100%', zIndex: 100, backgroundColor: 'white'}}>
                 <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: '10px', md: 0 }, m: '1em', alignItems: 'center', flexWrap: 'none' }}>
 
                     <PageViewButton pageView={pageView} onPageViewChange={onPageViewChange} />

@@ -55,7 +55,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                     onClick={() => click()}
                     style={{
                         position: 'absolute',
-                        backgroundColor: 'grey',
+                        backgroundColor: 'lightgrey',
                         cursor: 'pointer',
                         height: `${mediaBox.height}px`,
                         width: `${mediaBox.width}px`,
