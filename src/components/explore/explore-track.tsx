@@ -48,17 +48,20 @@ export default function ExploreTrack() {
 
     const handleResize = () => {
         if (divRef.current) {
+            
             const containerWidth = divRef.current.offsetWidth;
 
-            const newVisibleItems = Math.floor(containerWidth / (150 + 20));
+            const newVisibleItems = Math.floor(containerWidth / (140 + 20));
             if (newVisibleItems > data.length) {
-                setElementWidth(150);
+                setElementWidth(140);
                 setVisibleItems(data.length);
                 return;
             }
-            const itemWidth = Math.max((containerWidth - (newVisibleItems - 1) * 20) / (newVisibleItems), 150);
+            const itemWidth = (containerWidth) / (newVisibleItems);
             setVisibleItems(newVisibleItems);
-            setElementWidth(itemWidth);
+            setElementWidth(itemWidth - 20);
+
+            console.log(containerWidth + " " + newVisibleItems + " " + elementWidth);
         }
     };
 
@@ -76,7 +79,7 @@ export default function ExploreTrack() {
         <div style={{ margin: '8px' }}>
             <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Typography fontSize={16} pb={'8px'}>Places</Typography>
-                <Typography fontWeight={500} color={'rgb(41, 98, 255)'} fontSize={16} pb={'8px'}>View All</Typography>
+                <Typography fontWeight={500} color={'rgb(41, 98, 255)'} fontSize={16} pb={'8px'} mr={'20px'}>View All</Typography>
             </Box>
             {<div ref={divRef} style={{ display: 'flex', width: '100%', gap: 20, height: elementWidth, overflow: 'hidden' }}>
                 {
