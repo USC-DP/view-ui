@@ -2,7 +2,6 @@
 import React, { startTransition } from "react";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { FullImageDisplay } from "@/components/photo-display/full-image-display";
-import { fetchPhotoData } from "@/hooks/fetch-photo-data";
 
 
 import { useTransition, useEffect } from 'react';

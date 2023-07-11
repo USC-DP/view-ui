@@ -1,4 +1,3 @@
-import { fetchSegments } from "@/hooks/fetch-segment";
 import { MediaBox, ViewSegment, config } from "@/models/photo-display";
 import React from "react";
 import MediaTile from "./media-tile";

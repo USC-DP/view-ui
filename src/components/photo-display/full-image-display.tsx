@@ -14,7 +14,20 @@ import api from '@/api/api';
 export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContentType, setData?: React.Dispatch<React.SetStateAction<VisiblePhotoContentType>> }) {
     const theme = useTheme();
 
-    const { visiblePhotoContent } = React.useContext(VisiblePhotoContext);
+    const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
+
+    React.useEffect(() => {
+        if (visiblePhotoContent.photo?.photoId) {
+            api.fetchPhotoData(visiblePhotoContent.photo?.photoId).then(
+                d => {
+                    setVisiblePhotoContent(prev => ({
+                        ...prev,
+                        photo: d
+                    }))
+                }
+            )
+        }
+    }, [visiblePhotoContent.photo?.photoId])
 
 
     const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -25,7 +38,7 @@ export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContent
         } else {
             document.body.style.overflow = ''
         }
-        
+
     }, [visiblePhotoContent.isVisible])
 
     return (

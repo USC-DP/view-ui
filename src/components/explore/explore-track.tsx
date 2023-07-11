@@ -60,8 +60,6 @@ export default function ExploreTrack() {
             const itemWidth = (containerWidth) / (newVisibleItems);
             setVisibleItems(newVisibleItems);
             setElementWidth(itemWidth - 20);
-
-            console.log(containerWidth + " " + newVisibleItems + " " + elementWidth);
         }
     };
 

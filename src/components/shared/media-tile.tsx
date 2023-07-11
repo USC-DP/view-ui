@@ -28,7 +28,6 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                 if (imageRef.current) {
                     //@ts-ignore
     
-    
                     setVisiblePhotoContent((prev) => ({
                         ...prev,
                         isVisible: true,
