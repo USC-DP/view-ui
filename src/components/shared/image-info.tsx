@@ -175,7 +175,7 @@ export function ImageInfo({ data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto
 
                 <DenseInfoListItem icon={<ImageOutlinedIcon />} majorLabel={data.photoId} minorLabel={["8MP", `${data.width} × ${data.height}`]} />
 
-                <DenseInfoListItem icon={<LocationOnOutlinedIcon />} majorLabel="California" minorLabel={[`[${data.lon}, ${data.lat}]`]} />
+                <DenseInfoListItem icon={<LocationOnOutlinedIcon />} majorLabel="California" minorLabel={[`${data.lat}, ${data.lon}`]} />
 
                 <div ref={mapContainer} className="map-container" style={{ maxHeight: '360px' }} />
             </List>
