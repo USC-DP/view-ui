@@ -3,6 +3,8 @@ import MapView from "@/components/dashboard/map-view";
 import PageViewButton from "@/components/dashboard/page-view-button";
 import PhotoList from "@/components/dashboard/photo-list";
 import Searchbar from "@/components/dashboard/searchbar";
+import TopBar from "@/components/dashboard/topbar";
+import Navbar from "@/components/shared/navbar";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { Box } from "@mui/material";
 import React from "react";
@@ -14,9 +16,9 @@ export default function Dashboard() {
 
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+        <>
 
-            <div style={{position: 'fixed', width: '100%', zIndex: 100, backgroundColor: 'white'}}>
+            {/*<div style={{position: 'fixed', width: '100%', zIndex: 100, backgroundColor: 'white'}}>
                 <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: '10px', md: 0 }, m: '1em', alignItems: 'center', flexWrap: 'none' }}>
 
                     <PageViewButton pageView={pageView} onPageViewChange={onPageViewChange} />
@@ -24,7 +26,9 @@ export default function Dashboard() {
                     <Searchbar />
 
                 </Box>
-            </div>
+            </div>*/}
+            <Navbar />
+            <TopBar/>
 
 
 
@@ -32,6 +36,6 @@ export default function Dashboard() {
             {<MapView isVisible={pageView == 'map'}></MapView>}
             {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
 
-        </div>
+        </>
     )
 }

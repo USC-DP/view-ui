@@ -1,4 +1,4 @@
-import { Box, ListItem, ListItemButton, ListItemIcon, List, ListItemText } from "@mui/material";
+import { Box, ListItem, ListItemButton, ListItemIcon, List, ListItemText, Toolbar, Divider } from "@mui/material";
 import Typography from '@mui/joy/Typography';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -23,15 +23,19 @@ export default function Navbar() {
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen);
     };
-    
+
     const handleNav = (url: string) => {
         router.prefetch(url);
         router.push(url)
     }
 
+    // = styled('div')(({ theme }) => ({
     const drawerContent = (
-        <Box sx={{ bgcolor: 'white.paper', height: '100vh', m: 0, overflow: 'none' }}>
-            <List disablePadding sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Box sx={{ bgcolor: 'white.paper', m: 0, overflow: 'none', display: 'flex', flexDirection: 'column', height: '100vh' }}>
+            
+            <Toolbar sx={{display: {xs: 'none', sm: 'block'}}} />
+            <Divider />
+            <List disablePadding sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                 <ListItem disablePadding>
                     <ListItemButton onClick={() => handleNav('/dashboard')}>
                         <Typography level="h5">All Media</Typography>
@@ -107,7 +111,7 @@ export default function Navbar() {
     );
     return (
         <Box sx={{ width: { sm: 175 }, flexShrink: { sm: 0 }, zIndex: 200 }}>
-            <IconButton sx={{position: 'fixed'}} onClick={handleDrawerToggle}>
+            <IconButton sx={{ position: 'fixed' }} onClick={handleDrawerToggle}>
                 <MenuIcon />
 
             </IconButton>

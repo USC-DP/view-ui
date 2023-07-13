@@ -1,8 +1,8 @@
 import Navbar from "@/components/shared/navbar";
 import "../styles/globals.css";
-import { Box } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
-import React, { useTransition } from "react";
+import React from "react";
 import { FullImageDisplay } from "@/components/photo-display/full-image-display";
 import {
   ViewablePhotosContext,
@@ -29,11 +29,12 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
   });
 
   const getContent = () => {
-    if ([`/404`, '/login'].includes(appProps.router.pathname)) {
+    if ([`/404`, "/login"].includes(appProps.router.pathname)) {
       return <Component {...pageProps} />;
     }
 
     return (
+      
         <VisiblePhotoContext.Provider
           value={{ visiblePhotoContent, setVisiblePhotoContent }}
         >
@@ -61,7 +62,7 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
                     width: { sm: `calc(100% - 175px)` },
                     height: "100vh",
                   }}
-                >
+              >
                   <Component {...pageProps} />
                 </Box>
               </Box>

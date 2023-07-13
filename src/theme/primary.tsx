@@ -5,7 +5,7 @@ const viewTheme = createTheme({
         primary: {
             main: '#F29047',
             contrastText: '#FFF',
-            dark: '#db8444'
+            dark: '#db8444',
 
         }
     }
