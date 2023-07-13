@@ -28,7 +28,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
         api.fetchSegments(section.sectionId)
             .then(
                 d => {
-                    let segmentMargin = 50;
+                    let segmentMargin = 30;
                     let prevSegmentEnd = 20;
                     let segmentPosTemp: SegmentPosType[] = [];
                     let mediaBoxesTemp: MediaBox[][] = [];

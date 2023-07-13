@@ -126,7 +126,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
                     let newVisibleSections: Dictionary = {}
 
-                    let sectionMargin = 80;
+                    let sectionMargin = 60;
                     let prevSectionEnd = 20;
                     for (const sectionElement of d) {
 
