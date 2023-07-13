@@ -32,14 +32,6 @@ export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContent
 
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
-    /*React.useEffect(() => {
-        if (visiblePhotoContent.isVisible) {
-            document.body.style.overflow = ''
-        } else {
-            document.body.style.overflow = ''
-        }
-
-    }, [visiblePhotoContent.isVisible])*/
 
     return (
         <>

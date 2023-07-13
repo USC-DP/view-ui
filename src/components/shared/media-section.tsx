@@ -28,7 +28,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
         api.fetchSegments(section.sectionId)
             .then(
                 d => {
-                    let segmentMargin = 20;
+                    let segmentMargin = 50;
                     let prevSegmentEnd = 20;
                     let segmentPosTemp: SegmentPosType[] = [];
                     let mediaBoxesTemp: MediaBox[][] = [];
@@ -45,7 +45,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
                         segmentPosTemp.push(
                             (
                                 {
-                                    containerHeight: layout.containerHeight,
+                                    containerHeight: layout.containerHeight + 32,
                                     top: prevSegmentEnd
                                 }
                             ))
@@ -89,23 +89,21 @@ export default function MediaSection({ width, height, section, visible, top, upd
         const dateParts = dateString.split('-');
         const year = dateParts[0];
         const month = parseInt(dateParts[1]);
-        
+
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        
+
         const formattedDate = `${months[month - 1]}, ${year}`;
         return formattedDate;
-      }
+    }
 
     return (
         <>
-            <div ref={sectionRef} className="section" id={section.sectionId} style={{ width: width, height: height + 32, position: 'absolute', top: `${top}px`,/*backgroundColor: 'blueviolet'*/ }}>
+            <div ref={sectionRef} className="section" id={section.sectionId} style={{ width: width, height: height + 32 + 24, position: 'absolute', top: `${top}px`,/*backgroundColor: 'blueviolet'*/ }}>
                 <Typography fontSize={32}>{convertDate(section.sectionId)}</Typography>
                 {
                     fullyInitialized && segmentPoses && mediaBoxes && segments.length > 0 && segments.map((i, index) => {
                         return (
-                            <>
-                                <MediaSegment key={i.segmentId} width={width} segment={i} mediaBoxes={mediaBoxes[index]} segmentPos={segmentPoses[index]}></MediaSegment>
-                            </>
+                            <MediaSegment key={i.segmentId} width={width} segment={i} mediaBoxes={mediaBoxes[index]} segmentPos={segmentPoses[index]}></MediaSegment>
                         )
                     }
                     )
