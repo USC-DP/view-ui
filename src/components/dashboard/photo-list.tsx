@@ -125,9 +125,8 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
                     let newVisibleSections: Dictionary = {}
 
-
                     let sectionMargin = 80;
-                    let prevSectionEnd = 70;
+                    let prevSectionEnd = 0;
                     for (const sectionElement of d) {
 
                         newVisibleSections[sectionElement.sectionId] = {
@@ -167,7 +166,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
     }
 
     return (
-        <div ref={elementRef} style={{ display: isVisible ? 'block' : 'none' }}>
+        <div ref={elementRef} style={{ display: isVisible ? 'block' : 'none', height: 'calc(100vh - 64px)', position: 'relative', overflow: 'auto'}}>
             {
                 visibleSections && sections && sections.map((i, index) => {
                     return (

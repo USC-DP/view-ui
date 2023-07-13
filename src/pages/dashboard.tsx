@@ -27,8 +27,6 @@ export default function Dashboard() {
 
                 </Box>
             </div>*/}
-            <Navbar />
-            <TopBar/>
 
 
 

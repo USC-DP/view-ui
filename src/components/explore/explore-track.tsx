@@ -7,35 +7,35 @@ export default function ExploreTrack() {
 
     const data = [
         {
-            src: 'afe26bd7-55c7-4ba3-8601-4eb493ac26c7',
+            src: '6c6c8e08-cf15-4396-805a-45098044cbb7',
             label: 'Ocean'
         },
         {
-            src: 'bf66d868-69f7-471a-88d6-3d1dd5d8cb01',
+            src: '6c6c8e08-cf15-4396-805a-45098044cbb7',
             label: 'Mountains'
         },
         {
-            src: '5115c36f-50f1-464c-b9d9-2b514c6f9e9b',
+            src: '6c6c8e08-cf15-4396-805a-45098044cbb7',
             label: 'Lakes'
         },
         {
-            src: 'a4317ca7-e588-4f29-bb27-454d1f2fe0d0',
+            src: '6c6c8e08-cf15-4396-805a-45098044cbb7',
             label: 'Roads'
         },
         {
-            src: 'afe26bd7-55c7-4ba3-8601-4eb493ac26c7',
+            src: '6c6c8e08-cf15-4396-805a-45098044cbb7',
             label: 'Ocean'
         },
         {
-            src: 'bf66d868-69f7-471a-88d6-3d1dd5d8cb01',
+            src: '6c6c8e08-cf15-4396-805a-45098044cbb7',
             label: 'Mountains'
         },
         {
-            src: '5115c36f-50f1-464c-b9d9-2b514c6f9e9b',
+            src: '6c6c8e08-cf15-4396-805a-45098044cbb7',
             label: 'Lakes'
         },
         {
-            src: 'a4317ca7-e588-4f29-bb27-454d1f2fe0d0',
+            src: '6c6c8e08-cf15-4396-805a-45098044cbb7',
             label: 'Roads'
         }
     ]

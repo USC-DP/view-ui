@@ -26,7 +26,8 @@ export default function Navbar() {
 
     const handleNav = (url: string) => {
         router.prefetch(url);
-        router.push(url)
+        router.push(url);
+        setDrawerOpen(false);
     }
 
     // = styled('div')(({ theme }) => ({

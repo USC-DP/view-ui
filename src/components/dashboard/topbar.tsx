@@ -4,6 +4,7 @@ import PageViewButton from "./page-view-button";
 
 import SearchIcon from '@mui/icons-material/Search';
 import viewTheme from "@/theme/primary";
+import { useRouter } from "next/router";
 
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -54,12 +55,20 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 
 
 export default function TopBar() {
+
+    const router = useRouter();
+
     const [pageView, onPageViewChange] = React.useState<string>("list");
 
+    /*React.useEffect(() => {
+        if(router.asPath != "");
+    }, [])*/
+
     return (
-        <Box sx={{ position: 'sticky', zIndex: 100 }}>
-            <AppBar position="static" sx={{ backgroundColor: '#FFF', color: '#000' }} elevation={1}>
-                <Toolbar sx={{ display: 'flex',  flexDirection: {xs: 'column-reverse', sm: 'column-reverse', md: 'row'}, alignItems: 'center', justifyContent: 'space-around' }}>
+        <Box sx={{ position: 'fixed', zIndex: 100, width: '100%' }}>
+            <AppBar position="sticky" sx={{ backgroundColor: '#FFF', color: '#000' }} elevation={1}>
+                <Toolbar sx={{ display: 'flex', flexDirection: { xs: 'column-reverse', sm: 'column-reverse', md: 'row' }, alignItems: 'center', justifyContent: 'space-around' }}>
+                    {<Box sx={{ width: 175, height: 64, display: {xs: 'none', sm: 'block'} }}></Box>}
 
                     <Search>
                         <SearchIconWrapper>
@@ -71,7 +80,10 @@ export default function TopBar() {
                         />
                     </Search>
 
-                    <PageViewButton pageView={pageView} onPageViewChange={onPageViewChange} />
+
+                    {router && router.asPath == "/dashboard" &&
+                        <PageViewButton pageView={pageView} onPageViewChange={onPageViewChange} />
+                    }
 
                     {/*<div style={{ width: '100px', backgroundColor: 'green', height: '50px' }}></div>*/}
                 </Toolbar>

@@ -11,6 +11,7 @@ import {
 import { PreviousContentContext } from "@/contexts/previous-content-context";
 import TransitionProvder from "@/transition-lib/transition-provider";
 import FullPhotoDsiplay from "@/components/photo-display/full-photo-display-test";
+import TopBar from "@/components/dashboard/topbar";
 
 export default function MyApp({ Component, pageProps, ...appProps }) {
   const [visiblePhotoContent, setVisiblePhotoContent] = React.useState({
@@ -52,15 +53,16 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
               }
 
               <Box sx={{ display: "flex" }}>
-                {/* <Navbar />*/}
-                <Navbar />
 
+              {/* <Navbar />*/}
+                <Navbar />
+                <TopBar/>
                 {/*Main content*/}
                 <Box
-                  sx={{
-                    flexGrow: 1,
-                    width: { sm: `calc(100% - 175px)` },
-                    height: "100vh",
+                sx={{
+                  flexGrow: 1,
+                  marginTop: '64px',
+                    width: { sm: `calc(100% - 175px)` }
                   }}
               >
                   <Component {...pageProps} />
