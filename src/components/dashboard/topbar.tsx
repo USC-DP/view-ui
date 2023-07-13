@@ -66,7 +66,7 @@ export default function TopBar() {
 
     return (
         <Box sx={{ position: 'fixed', zIndex: 100, width: '100%' }}>
-            <AppBar position="sticky" sx={{ backgroundColor: '#FFF', color: '#000' }} elevation={1}>
+            <AppBar position="static" sx={{ backgroundColor: '#FFF', color: '#000' }} elevation={1}>
                 <Toolbar sx={{ display: 'flex', flexDirection: { xs: 'column-reverse', sm: 'column-reverse', md: 'row' }, alignItems: 'center', justifyContent: 'space-around' }}>
                     {<Box sx={{ width: 175, height: 64, display: {xs: 'none', sm: 'block'} }}></Box>}
 

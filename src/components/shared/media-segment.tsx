@@ -1,6 +1,7 @@
 import { MediaBox, ViewSegment, config } from "@/models/photo-display";
 import React from "react";
 import MediaTile from "./media-tile";
+import { Typography } from "@mui/material";
 
 var justifiedLayout = require('justified-layout')
 
@@ -13,10 +14,12 @@ export default function MediaSegment({ width, segment, mediaBoxes, segmentPos }:
 
 
     return (
-        <div className="segment" style={{ position: 'absolute', /*backgroundColor: 'blue',*/ width: width, height: segmentPos.containerHeight, top: segmentPos.top}}>
+        <div className="segment" style={{ position: 'absolute', /*backgroundColor: 'blue',*/ width: width, height: segmentPos.containerHeight, top: segmentPos.top }}>
             {segment && mediaBoxes && mediaBoxes.map((i, index) => {
                 return (
-                    <MediaTile key={segment.media[index].mediaId} mediaBox={i} media={segment.media[index]}></MediaTile>
+                    <>
+                        <MediaTile key={segment.media[index].mediaId} mediaBox={i} media={segment.media[index]}></MediaTile>
+                    </>
                 );
             })}
         </div>

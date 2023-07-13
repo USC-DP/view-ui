@@ -3,6 +3,7 @@ import { Section, config } from "@/models/photo-display";
 import MediaSection from "../shared/media-section";
 import { PreviousContentContext } from "@/contexts/previous-content-context";
 import api from "@/api/api";
+import { Typography } from "@mui/joy";
 
 interface Dictionary {
     [key: string]: {
@@ -24,24 +25,24 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
         const handleResize = () => {
             if (elementRef.current) {
-                setElementWidth(elementRef.current.clientWidth - 25);
-          }
-        };
-    
-        // Initial width on component mount
-        if (elementRef.current) {
-          setElementWidth(elementRef.current.clientWidth - 25);
-        }
-    
-        // Update width on window resize
-        window.addEventListener('resize', handleResize);
-    
-        // Cleanup the event listener on component unmount
-        return () => {
-          window.removeEventListener('resize', handleResize);
+                setElementWidth(elementRef.current.clientWidth - 10);
+            }
         };
 
-      }, []);    
+        // Initial width on component mount
+        if (elementRef.current) {
+            setElementWidth(elementRef.current.clientWidth - 10);
+        }
+
+        // Update width on window resize
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup the event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+
+    }, []);
 
 
     function updateSectionHeight(sectionId: string, newHeight: number): void {
@@ -126,7 +127,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
                     let newVisibleSections: Dictionary = {}
 
                     let sectionMargin = 80;
-                    let prevSectionEnd = 0;
+                    let prevSectionEnd = 20;
                     for (const sectionElement of d) {
 
                         newVisibleSections[sectionElement.sectionId] = {
@@ -166,7 +167,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
     }
 
     return (
-        <div ref={elementRef} style={{ display: isVisible ? 'block' : 'none', height: 'calc(100vh - 64px)', position: 'relative', overflow: 'auto'}}>
+        <div ref={elementRef} style={{ display: isVisible ? 'block' : 'none', height: 'calc(100vh - 64px)', position: 'relative', overflow: 'auto', overflowX: 'hidden' }}>
             {
                 visibleSections && sections && sections.map((i, index) => {
                     return (

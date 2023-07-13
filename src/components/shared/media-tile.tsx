@@ -58,7 +58,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                         cursor: 'pointer',
                         height: `${mediaBox.height}px`,
                         width: `${mediaBox.width}px`,
-                        top: `${mediaBox.top}px`,
+                        top: `${mediaBox.top + 32}px`,
                         left: `${mediaBox.left}px`,
                         backgroundImage: `url(${api.fetchPhotoUrl(media.mediaId)})`,
                         backgroundSize: 'cover',
