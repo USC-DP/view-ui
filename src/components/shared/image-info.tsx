@@ -1,4 +1,4 @@
-import { Box, ListItem, ListItemButton, List, IconButton, TextField } from "@mui/material";
+import { Box, ListItem, ListItemButton, List, IconButton, TextField, Autocomplete, createFilterOptions } from "@mui/material";
 import React from "react";
 import Drawer from '@mui/material/Drawer';
 
@@ -165,6 +165,29 @@ export function ImageInfo({ data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto
                     <TextField id="standard-basic" placeholder="Add a description" variant="standard" sx={{ width: '100%' }} multiline />
                 </ListItem>
 
+                <ListItem sx={{ p: '16.5px 24px' }}>
+                    <Autocomplete
+                        disableClearable
+                        freeSolo
+                        filterOptions={createFilterOptions({
+                            limit: 3
+                        })}
+                        sx={{width: '100%'}}
+                        multiple
+                        id="tags-standard"
+                        options={['a','b','c','d','e','f','g','h','i','j','k','l','m']}
+                        getOptionLabel={(option) => option}
+                        defaultValue={["test"]}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                variant="standard"
+                                label="Categories"
+                            />
+                        )}
+                    />
+                </ListItem>
+
                 <ListItem sx={{ p: '14px 24px' }}>
                     <Typography fontSize={'11px'} fontFamily={'Roboto, Arial, sans-serif'} fontWeight={'550'} textColor="rgb(95,99,104)" letterSpacing={'0.8px'}>DETAILS</Typography>
                 </ListItem>
@@ -177,7 +200,7 @@ export function ImageInfo({ data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto
 
                 <DenseInfoListItem icon={<LocationOnOutlinedIcon />} majorLabel="California" minorLabel={[`${data.lat}, ${data.lon}`]} />
 
-                <div ref={mapContainer} className="map-container" style={{ maxHeight: '360px' }} />
+                <div ref={mapContainer} className="map-container" style={{ maxHeight: '360px', minHeight: '360px' }} />
             </List>
         </Box>
     );
