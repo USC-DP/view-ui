@@ -5,6 +5,7 @@ import PageViewButton from "./page-view-button";
 import SearchIcon from '@mui/icons-material/Search';
 import viewTheme from "@/theme/primary";
 import { useRouter } from "next/router";
+import { UserContext } from "@/contexts/user-context";
 
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -64,11 +65,15 @@ export default function TopBar() {
         if(router.asPath != "");
     }, [])*/
 
+    const { setUser } = React.useContext(UserContext)
+
+    const [searchText, setSearchText] = React.useState<string>("");
+
     return (
         <Box sx={{ position: 'fixed', zIndex: 100, width: '100%' }}>
             <AppBar position="static" sx={{ backgroundColor: '#FFF', color: '#000' }} elevation={1}>
                 <Toolbar sx={{ display: 'flex', flexDirection: { xs: 'column-reverse', sm: 'column-reverse', md: 'row' }, alignItems: 'center', justifyContent: 'space-around' }}>
-                    {<Box sx={{ width: 175, height: 64, display: {xs: 'none', sm: 'block'} }}></Box>}
+                    {<Box sx={{ width: 175, height: 64, display: { xs: 'none', sm: 'block' } }}></Box>}
 
                     <Search>
                         <SearchIconWrapper>
@@ -76,6 +81,16 @@ export default function TopBar() {
                         </SearchIconWrapper>
                         <StyledInputBase
                             placeholder="Search…"
+
+                            onKeyDown={(k) => {
+                                if (k.key == 'Enter') {
+                                    setUser((p) => ({
+                                        ...p,
+                                        searchTerm: searchText
+                                    }))
+                                }
+                            }}
+                            onChange={(e) => setSearchText(e.target.value)}
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>

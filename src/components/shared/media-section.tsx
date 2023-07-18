@@ -3,6 +3,7 @@ import React from "react";
 import MediaSegment from "./media-segment";
 import api from "@/api/api";
 import { Typography } from "@mui/joy";
+import { UserContext } from "@/contexts/user-context";
 
 var justifiedLayout = require('justified-layout')
 
@@ -21,11 +22,12 @@ export default function MediaSection({ width, height, section, visible, top, upd
 
     const [fullyInitialized, setfullyInitialized] = React.useState<boolean>(false);
 
-    let lastSectionUpdateTimes: any = {};
+    const { user } = React.useContext(UserContext);
 
 
     function populateSegments() {
-        api.fetchSegments(section.sectionId)
+        // search term goes here
+        api.fetchSegments(section.sectionId, user.searchTerm)
             .then(
                 d => {
                     let segmentMargin = 30;

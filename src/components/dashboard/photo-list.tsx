@@ -4,6 +4,7 @@ import MediaSection from "../shared/media-section";
 import { PreviousContentContext } from "@/contexts/previous-content-context";
 import api from "@/api/api";
 import { Typography } from "@mui/joy";
+import { UserContext } from "@/contexts/user-context";
 
 interface Dictionary {
     [key: string]: {
@@ -20,6 +21,8 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
     const [elementWidth, setElementWidth] = React.useState<number>(10000);
     const elementRef = React.useRef<HTMLDivElement>(null);
+
+    const { user } = React.useContext(UserContext);
 
     React.useEffect(() => {
 
@@ -120,7 +123,8 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
     }
 
     React.useEffect(() => {
-        api.fetchSections()
+        // Search Term Goes Here
+        api.fetchSections(user.searchTerm)
             .then(
                 d => {
 
@@ -145,7 +149,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
 
                 }
             )
-    }, [])
+    }, [user.searchTerm])
 
     React.useEffect(() => {
         const sectionObserver = new IntersectionObserver(handleSectionIntersection, {

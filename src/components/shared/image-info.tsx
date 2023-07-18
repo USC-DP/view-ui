@@ -97,7 +97,7 @@ export function ImageInfo({ data, drawerOpen, setDrawerOpen, mediaCategories, se
                 container: mapContainer.current,
                 style: 'mapbox://styles/mapbox/streets-v12',
                 center: [data.lon, data.lat],
-                zoom: 14
+                zoom: 1
             });
 
             map.current.on('load', () => {

@@ -26,13 +26,14 @@ class Api {
         return res.data;
     }
 
-    public async fetchSections() {
-        const res = await axios.get(this.serverUrl + '/photos/sections');
+    public async fetchSections(searchTerm: string = "") {
+        const res = await axios.get(this.serverUrl + '/photos/sections/' + searchTerm);
         return res.data;
     }
 
-    public async fetchSegments(sectionId: string): Promise<ViewSegment[]> {
-        const res = await axios.get(this.serverUrl + '/photos/segments/' + sectionId);
+    public async fetchSegments(sectionId: string, searchTerm?: string): Promise<ViewSegment[]> {
+        let url = this.serverUrl + '/photos/segments/' + sectionId + (searchTerm ? "?search=" + searchTerm : "");
+        const res = await axios.get(url);
         return res.data;
     }
 

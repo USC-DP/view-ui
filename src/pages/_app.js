@@ -12,6 +12,7 @@ import { PreviousContentContext } from "@/contexts/previous-content-context";
 import TransitionProvder from "@/transition-lib/transition-provider";
 import FullPhotoDsiplay from "@/components/photo-display/full-photo-display-test";
 import TopBar from "@/components/dashboard/topbar";
+import { UserContext } from "@/contexts/user-context";
 
 export default function MyApp({ Component, pageProps, ...appProps }) {
   const [visiblePhotoContent, setVisiblePhotoContent] = React.useState({
@@ -29,13 +30,17 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     scrollPosition: 0,
   });
 
+  const [user, setUser] = React.useState({
+    searchTerm: "",
+  });
+
   const getContent = () => {
     if ([`/404`, "/login"].includes(appProps.router.pathname)) {
       return <Component {...pageProps} />;
     }
 
     return (
-      
+      <UserContext.Provider value={{ user, setUser }}>
         <VisiblePhotoContext.Provider
           value={{ visiblePhotoContent, setVisiblePhotoContent }}
         >
@@ -53,24 +58,24 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
               }
 
               <Box sx={{ display: "flex" }}>
-
-              {/* <Navbar />*/}
+                {/* <Navbar />*/}
                 <Navbar />
-                <TopBar/>
+                <TopBar />
                 {/*Main content*/}
                 <Box
-                sx={{
-                  flexGrow: 1,
-                  marginTop: '64px',
-                    width: { sm: `calc(100% - 175px)` }
+                  sx={{
+                    flexGrow: 1,
+                    marginTop: "64px",
+                    width: { sm: `calc(100% - 175px)` },
                   }}
-              >
+                >
                   <Component {...pageProps} />
                 </Box>
               </Box>
             </PreviousContentContext.Provider>
           </ViewablePhotosContext.Provider>
         </VisiblePhotoContext.Provider>
+      </UserContext.Provider>
     );
   };
 

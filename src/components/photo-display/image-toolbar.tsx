@@ -23,6 +23,7 @@ export function ImageToolbar({ data, drawerOpen, setDrawerOpen }: { data: HtmlPh
 
     const mediaCategoriesRef = React.useRef<string[]>(mediaCategories);
 
+
     React.useEffect(() => {
         mediaCategoriesRef.current = mediaCategories;
     }, [mediaCategories]);
