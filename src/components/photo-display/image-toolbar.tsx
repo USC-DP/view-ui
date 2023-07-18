@@ -28,12 +28,19 @@ export function ImageToolbar({ data, drawerOpen, setDrawerOpen }: { data: HtmlPh
         mediaCategoriesRef.current = mediaCategories;
     }, [mediaCategories]);
 
+    const [isTyping, setIsTyping] = React.useState<boolean>(false);
+    const isTypingRef = React.useRef<boolean>(isTyping);
+
+
+    React.useEffect(() => {
+        isTypingRef.current = isTyping;
+    }, [isTyping]);
 
     const router = useViewTransitionRouter();
 
     React.useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
-            if (event.key === 'i') {
+            if (!isTypingRef.current && event.key === 'i') {
                 setDrawerOpen((i) => !i);
             }
             else if (event.key === "Escape") {
@@ -81,7 +88,7 @@ export function ImageToolbar({ data, drawerOpen, setDrawerOpen }: { data: HtmlPh
                     <ArrowBackIcon sx={{ color: 'white' }} />
                 </IconButton>
                 <Box sx={{ flexGrow: 1 }}></Box>
-                <ImageInfo data={data} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} mediaCategories={mediaCategories} setMediaCategories={setMediaCategories}></ImageInfo>
+                <ImageInfo setIsTyping={setIsTyping} data={data} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} mediaCategories={mediaCategories} setMediaCategories={setMediaCategories}></ImageInfo>
             </Toolbar>
         </Box>
     );

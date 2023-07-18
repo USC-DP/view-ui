@@ -81,7 +81,7 @@ const DenseInfoListItemDate = ({ dateString }: { dateString: string }) => {
 }
 
 
-export function ImageInfo({ data, drawerOpen, setDrawerOpen, mediaCategories, setMediaCategories }: { data: HtmlPhoto, drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>, mediaCategories: string[], setMediaCategories: React.Dispatch<React.SetStateAction<string[]>> }) {
+export function ImageInfo({ data, drawerOpen, setDrawerOpen, mediaCategories, setMediaCategories, setIsTyping }: { data: HtmlPhoto, drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>, mediaCategories: string[], setMediaCategories: React.Dispatch<React.SetStateAction<string[]>>, setIsTyping: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     const map = React.useRef<any>();
     const mapContainer = React.useRef<any>();
@@ -183,6 +183,8 @@ export function ImageInfo({ data, drawerOpen, setDrawerOpen, mediaCategories, se
                         }}
                         sx={{width: '100%'}}
                         id="tags-standard"
+                        onFocus={() => setIsTyping(true)}
+                        onBlur={() => setIsTyping(false)}
                         value={mediaCategories}
                         options={['a','b','c','d','e','f','g','h','i','j','k','l','m']}
                         getOptionLabel={(option) => option}
