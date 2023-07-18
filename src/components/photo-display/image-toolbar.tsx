@@ -13,10 +13,20 @@ import Photo from "@/pages/view/[id]";
 import { useRouter } from "next/router";
 import useViewTransitionRouter from "@/transition-lib/use-transition-router";
 import { HtmlPhoto } from "@/models/photo-display";
+import api from "@/api/api";
 
-export function ImageToolbar({data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto, drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
+export function ImageToolbar({ data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto, drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
 
     const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
+
+    const [mediaCategories, setMediaCategories] = React.useState<string[]>([]);
+
+    const mediaCategoriesRef = React.useRef<string[]>(mediaCategories);
+
+    React.useEffect(() => {
+        mediaCategoriesRef.current = mediaCategories;
+    }, [mediaCategories]);
+
 
     const router = useViewTransitionRouter();
 
@@ -32,6 +42,17 @@ export function ImageToolbar({data, drawerOpen, setDrawerOpen }: { data: HtmlPho
 
         window.addEventListener('keydown', handleKeyPress);
 
+
+        api.getMediaCategories(data.photoId).then(
+            d => {
+                let arr = [];
+                for (const v of d) {
+                    arr.push(v.tag);
+                }
+                setMediaCategories(arr);
+            }
+        );
+
         return () => {
             window.removeEventListener('keydown', handleKeyPress);
         }
@@ -39,6 +60,8 @@ export function ImageToolbar({data, drawerOpen, setDrawerOpen }: { data: HtmlPho
 
 
     function click() {
+        api.postMediaCategories(data.photoId, mediaCategoriesRef.current);
+
         document.startViewTransition(() => {
             flushSync(() => {
                 setVisiblePhotoContent((i) => ({
@@ -47,7 +70,6 @@ export function ImageToolbar({data, drawerOpen, setDrawerOpen }: { data: HtmlPho
                 }))
             })
         })
-
         //router.push("/dashboard/");
     }
 
@@ -58,7 +80,7 @@ export function ImageToolbar({data, drawerOpen, setDrawerOpen }: { data: HtmlPho
                     <ArrowBackIcon sx={{ color: 'white' }} />
                 </IconButton>
                 <Box sx={{ flexGrow: 1 }}></Box>
-                <ImageInfo data={data} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}></ImageInfo>
+                <ImageInfo data={data} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} mediaCategories={mediaCategories} setMediaCategories={setMediaCategories}></ImageInfo>
             </Toolbar>
         </Box>
     );

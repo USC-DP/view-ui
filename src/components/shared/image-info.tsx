@@ -16,6 +16,9 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import { HtmlPhoto } from "@/models/photo-display";
+import api from "@/api/api";
+
+
 
 
 const DenseInfoListItem = ({ icon, majorLabel, minorLabel }: { icon: any, majorLabel: string, minorLabel?: string[] }) => {
@@ -78,7 +81,7 @@ const DenseInfoListItemDate = ({ dateString }: { dateString: string }) => {
 }
 
 
-export function ImageInfo({ data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto, drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
+export function ImageInfo({ data, drawerOpen, setDrawerOpen, mediaCategories, setMediaCategories }: { data: HtmlPhoto, drawerOpen: boolean, setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>, mediaCategories: string[], setMediaCategories: React.Dispatch<React.SetStateAction<string[]>> }) {
 
     const map = React.useRef<any>();
     const mapContainer = React.useRef<any>();
@@ -167,17 +170,22 @@ export function ImageInfo({ data, drawerOpen, setDrawerOpen }: { data: HtmlPhoto
 
                 <ListItem sx={{ p: '16.5px 24px' }}>
                     <Autocomplete
+                        
                         disableClearable
                         freeSolo
+                        multiple
+                        clearOnBlur
                         filterOptions={createFilterOptions({
                             limit: 3
                         })}
+                        onChange={(e, value) => {
+                            setMediaCategories(value);
+                        }}
                         sx={{width: '100%'}}
-                        multiple
                         id="tags-standard"
+                        value={mediaCategories}
                         options={['a','b','c','d','e','f','g','h','i','j','k','l','m']}
                         getOptionLabel={(option) => option}
-                        defaultValue={["test"]}
                         renderInput={(params) => (
                             <TextField
                                 {...params}

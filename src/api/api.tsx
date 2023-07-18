@@ -41,6 +41,19 @@ class Api {
         return res.data;
     }
 
+    public async postMediaCategories(photoId: string, tags: string[]) {
+        const res = await axios.post(this.serverUrl + '/photos/photo/set-categories/', {
+            photoId: photoId,
+            tag: tags
+        });
+        return res.data;
+    }
+
+    public async getMediaCategories(photoId: string) {
+        const res = await axios.get(this.serverUrl + '/photos/photo/get-categories/' + photoId);
+        return res.data;
+    }
+
 }
 
 const api = new Api();
