@@ -206,7 +206,7 @@ export function ImageInfo({ data, drawerOpen, setDrawerOpen, mediaCategories, se
 
                 <DenseInfoListItem icon={<CameraOutlinedIcon />} majorLabel="Google Pixel 3a XL" minorLabel={["ƒ/2", "1/60", "2.51mm", "ISO71"]} />
 
-                <DenseInfoListItem icon={<ImageOutlinedIcon />} majorLabel={data.photoId} minorLabel={["8MP", `${data.width} × ${data.height}`]} />
+                <DenseInfoListItem icon={<ImageOutlinedIcon />} majorLabel={data.mediaId} minorLabel={["8MP", `${data.width} × ${data.height}`]} />
 
                 <DenseInfoListItem icon={<LocationOnOutlinedIcon />} majorLabel="California" minorLabel={[`${data.lat}, ${data.lon}`]} />
 

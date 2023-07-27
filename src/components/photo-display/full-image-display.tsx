@@ -17,8 +17,9 @@ export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContent
     const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
 
     React.useEffect(() => {
-        if (visiblePhotoContent.photo?.photoId) {
-            api.fetchPhotoData(visiblePhotoContent.photo?.photoId).then(
+        //console.log(visiblePhotoContent.photo?.mediaId)
+        if (visiblePhotoContent.photo?.mediaId) {
+            api.fetchPhotoData(visiblePhotoContent.photo?.mediaId).then(
                 d => {
                     setVisiblePhotoContent(prev => ({
                         ...prev,
@@ -27,7 +28,7 @@ export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContent
                 }
             )
         }
-    }, [visiblePhotoContent.photo?.photoId])
+    }, [visiblePhotoContent.photo?.mediaId])
 
 
     const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -49,7 +50,7 @@ export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContent
                                 &&
                                 <Image
                                     unoptimized={true}
-                                    src={api.fetchPhotoUrl(visiblePhotoContent.photo.photoId)}
+                                    src={api.fetchPhotoUrl(visiblePhotoContent.photo.mediaId)}
                                     width={0} height={0} sizes="100vw"
                                     className={`image`}
                                     alt=""

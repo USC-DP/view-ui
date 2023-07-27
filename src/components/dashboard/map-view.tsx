@@ -25,7 +25,7 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
             zoom: zoom
         });
 
-        api.fetchPhotoGeoData("095785b9-d07b-4307-9e7f-c16eae55526a")
+        api.fetchPhotoGeoData("68a4d453-28e6-46d4-b63b-1c5f60789e81")
             .then((d) => {
                 map.current.on('load', () => {
                     // Add an image to use as a custom marker

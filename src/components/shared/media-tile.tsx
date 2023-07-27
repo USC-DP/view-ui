@@ -20,7 +20,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
         setPreviousContent((i) => ({
             ...i,
             scrollPosition: window.scrollY,
-            photoId: media.mediaId
+            mediaId: media.mediaId
         }));
 
         document.startViewTransition(() => {
@@ -32,7 +32,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                         ...prev,
                         isVisible: true,
                         photo: {
-                            photoId: media.mediaId,
+                            mediaId: media.mediaId,
                             width: media.width,
                             height: media.height
                         }
@@ -48,7 +48,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
     return (
         <>
             {
-                !visiblePhotoContent.isVisible && visiblePhotoContent.photo?.photoId !== media.mediaId && 
+                !visiblePhotoContent.isVisible && visiblePhotoContent.photo?.mediaId !== media.mediaId && 
                 <div
                     ref={imageRef}
                     onClick={() => click()}
@@ -63,7 +63,7 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
                         backgroundImage: `url(${api.fetchPhotoUrl(media.mediaId)})`,
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
-                        viewTransitionName: media.mediaId === previousContent.photoId ? "i" : 'none'
+                        viewTransitionName: media.mediaId === previousContent.mediaId ? "i" : 'none'
                     }}></div>
             }
         </>

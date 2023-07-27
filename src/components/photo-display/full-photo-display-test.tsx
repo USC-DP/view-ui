@@ -8,7 +8,7 @@ export default function FullPhotoDsiplay({ data, setData }: { data: VisiblePhoto
 
             {data && data.photo && <Image
                 unoptimized={true}
-                src={api.fetchPhotoUrl(data.photo.photoId)}
+                src={api.fetchPhotoUrl(data.photo.mediaId)}
                 width={0} height={0} sizes="100vw"
                 className={`image`}
                 alt=""

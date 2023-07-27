@@ -1,5 +1,5 @@
 export interface HtmlPhoto {
-    photoId: string,
+    mediaId: string,
     path?: string,
     width: number,
     height: number,

@@ -12,7 +12,7 @@ export const VisiblePhotoContext = React.createContext<{
 }>({
     visiblePhotoContent: {
         photo: {
-            photoId: "cef29661-9d4b-443f-84f2-507a7a5ddfb0",
+            mediaId: "cef29661-9d4b-443f-84f2-507a7a5ddfb0",
             width: 1,
             height: 1,
         },

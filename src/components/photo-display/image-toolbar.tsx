@@ -51,7 +51,7 @@ export function ImageToolbar({ data, drawerOpen, setDrawerOpen }: { data: HtmlPh
         window.addEventListener('keydown', handleKeyPress);
 
 
-        api.getMediaCategories(data.photoId).then(
+        api.getMediaCategories(data.mediaId).then(
             d => {
                 let arr = [];
                 for (const v of d) {
@@ -68,7 +68,7 @@ export function ImageToolbar({ data, drawerOpen, setDrawerOpen }: { data: HtmlPh
 
 
     function click() {
-        api.postMediaCategories(data.photoId, mediaCategoriesRef.current);
+        api.postMediaCategories(data.mediaId, mediaCategoriesRef.current);
 
         document.startViewTransition(() => {
             flushSync(() => {
