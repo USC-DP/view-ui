@@ -2,9 +2,11 @@ import CalendarDisplay from "@/components/dashboard/calendar";
 import MapView from "@/components/dashboard/map-view";
 import PageViewButton from "@/components/dashboard/page-view-button";
 import PhotoList from "@/components/dashboard/photo-list";
+import PhotoTest from "@/components/dashboard/photos.test";
 import Searchbar from "@/components/dashboard/searchbar";
 import TopBar from "@/components/dashboard/topbar";
 import Navbar from "@/components/shared/navbar";
+import { UserContext } from "@/contexts/user-context";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { Box } from "@mui/material";
 import React from "react";
@@ -13,6 +15,9 @@ import React from "react";
 export default function Dashboard() {
 
     const [pageView, onPageViewChange] = React.useState<string>('list')
+
+    const { user } = React.useContext(UserContext);
+    
 
 
     return (
@@ -28,9 +33,10 @@ export default function Dashboard() {
                 </Box>
             </div>*/}
 
+            
 
-
-            {<PhotoList isVisible={pageView == 'list'}></PhotoList>}
+            {user.searchTerm == '' && <PhotoList isVisible={pageView == 'list'}></PhotoList>}
+            {user.searchTerm != '' && <PhotoTest></PhotoTest>}
             {<MapView isVisible={pageView == 'map'}></MapView>}
             {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
 

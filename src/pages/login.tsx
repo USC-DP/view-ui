@@ -1,3 +1,4 @@
+import api from '@/api/api';
 import viewTheme from '@/theme/primary';
 import { Button, ThemeProvider, Typography } from '@mui/material';
 import { Box, Grid, TextField } from "@mui/material";
@@ -13,6 +14,9 @@ export default function Login() {
 
     let submitCredentials = () => {
         console.log(username, password);
+        api.login(username, password).then(data => {
+            localStorage.setItem('token', data.accessToken)
+        });
         router.push('/dashboard');
     }
 
