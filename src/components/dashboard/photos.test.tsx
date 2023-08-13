@@ -28,11 +28,12 @@ export default function PhotoTest() {
                             position: 'relative',
                             backgroundColor: 'lightgrey',
                             cursor: 'pointer',
-                            height: '120px',
+                            height: '240px',
                             width: '240px',
                             backgroundImage: `url(${api.fetchPhotoUrl(media)})`,
                             backgroundSize: 'cover',
                             backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center center'
                             //viewTransitionName: media.mediaId === previousContent.mediaId ? "i" : 'none'
                         }}></div>
                 })

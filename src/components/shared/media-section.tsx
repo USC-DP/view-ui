@@ -27,7 +27,7 @@ export default function MediaSection({ width, height, section, visible, top, upd
 
     function populateSegments() {
         // search term goes here
-        api.fetchSegments(section.sectionId, user.searchTerm)
+        api.fetchSegments(section.sectionId, section.totalMedia, user.searchTerm)
             .then(
                 d => {
                     let segmentMargin = 30;

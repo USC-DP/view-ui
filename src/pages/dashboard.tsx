@@ -35,8 +35,8 @@ export default function Dashboard() {
 
             
 
-            {user.searchTerm == '' && <PhotoList isVisible={pageView == 'list'}></PhotoList>}
-            {user.searchTerm != '' && <PhotoTest></PhotoTest>}
+            {<PhotoList isVisible={pageView == 'list'}></PhotoList>}
+            {/*user.searchTerm != '' && <PhotoTest></PhotoTest>*/}
             {<MapView isVisible={pageView == 'map'}></MapView>}
             {<CalendarDisplay isVisible={pageView == 'calendar'}></CalendarDisplay>}
 

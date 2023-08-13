@@ -34,13 +34,13 @@ class Api {
     }
 
     public async fetchSections(searchTerm: string = "") {
-        const res = await axios.get(this.serverUrl + '/media/sections/' + searchTerm, this.getHeaders());
+        const res = await axios.post(this.serverUrl + '/media/search-sections/', { search: searchTerm }, this.getHeaders());
         return res.data;
     }
 
-    public async fetchSegments(sectionId: string, searchTerm?: string): Promise<ViewSegment[]> {
-        let url = this.serverUrl + '/media/segments/' + sectionId + (searchTerm ? "?search=" + searchTerm : "");
-        const res = await axios.get(url, this.getHeaders());
+    public async fetchSegments(sectionId: string, amount: number, searchTerm: string): Promise<ViewSegment[]> {
+        //let url = this.serverUrl + '/media/segments/' + sectionId + (searchTerm ? "?search=" + searchTerm : "");
+        const res = await axios.post(this.serverUrl + "/media/search-segments/", { sectionId: sectionId, search: searchTerm, amount }, this.getHeaders());
         return res.data;
     }
 
@@ -69,7 +69,6 @@ class Api {
 
     public async searchMedia(searchTerm: string) {
         const res = await axios.get(this.serverUrl + '/media/search/' + searchTerm, this.getHeaders())
-        console.log(res.data)
         return res.data;
     }
 
