@@ -13,7 +13,7 @@ export default function Login() {
     const [password, setPassword] = React.useState<string>("");
 
     let submitCredentials = () => {
-        console.log(username, password);
+        //console.log(username, password);
         api.login(username, password).then(data => {
             localStorage.setItem('token', data.accessToken)
         });
