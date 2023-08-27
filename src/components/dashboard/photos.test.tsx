@@ -1,5 +1,5 @@
 import api from "@/api/api";
-import { UserContext } from "@/contexts/user-context";
+import { UserContext, useUserContext } from "@/contexts/user-context";
 import React from "react";
 
 
@@ -7,7 +7,7 @@ export default function PhotoTest() {
 
     const [results, setResults] = React.useState<string[]>([]);
 
-    const { user } = React.useContext(UserContext);
+    const { user } = useUserContext();
 
     React.useEffect(() => {
         api.searchMedia(user.searchTerm).then(res => {

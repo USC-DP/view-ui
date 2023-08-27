@@ -9,15 +9,29 @@ export type VisiblePhotoContentType = {
 export const VisiblePhotoContext = React.createContext<{
     visiblePhotoContent: VisiblePhotoContentType;
     setVisiblePhotoContent: React.Dispatch<React.SetStateAction<VisiblePhotoContentType>>;
-}>({
-    visiblePhotoContent: {
-        photo: {
-            mediaId: "cef29661-9d4b-443f-84f2-507a7a5ddfb0",
-            width: 1,
-            height: 1,
-        },
-        isVisible: false,
-    },
-    setVisiblePhotoContent: () => { },
+}| null>(null);
 
-});
+
+const { Provider } = VisiblePhotoContext;
+
+/*export const VisiblePhotoProvider = ({ children }: any) => {
+    const [visiblePhotoContent, setVisiblePhotoContent] = React.useState<VisiblePhotoContentType>({
+        photo: null,
+        isVisible: false,
+    });
+
+    const contextValue = {
+        visiblePhotoContent,
+        setVisiblePhotoContent
+    }
+
+    return <Provider value={contextValue}>({children})</Provider>
+}*/
+
+export const useVisiblePhotoContext = () => {
+    const context = React.useContext(VisiblePhotoContext);
+    if (context === undefined || context == null) {
+        throw new Error('useVisiblePhotoContext must be used within a VisiblePhotoProvider');
+    }
+    return context;
+};

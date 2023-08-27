@@ -1,4 +1,5 @@
 import api from '@/api/api';
+import { UserContext, useUserContext } from '@/contexts/user-context';
 import viewTheme from '@/theme/primary';
 import { Button, ThemeProvider, Typography } from '@mui/material';
 import { Box, Grid, TextField } from "@mui/material";
@@ -7,6 +8,7 @@ import React from 'react';
 
 export default function Login() {
 
+    const { setUserAuthInfo } = useUserContext();
     const router = useRouter();
 
     const [username, setUsername] = React.useState<string>("");
@@ -14,10 +16,13 @@ export default function Login() {
 
     let submitCredentials = () => {
         //console.log(username, password);
+
         api.login(username, password).then(data => {
-            localStorage.setItem('token', data.accessToken)
+            console.log(data.accessToken);
+            setUserAuthInfo(data.accessToken)
+            //localStorage.setItem('token', data.accessToken)
+            router.push('/dashboard');
         });
-        router.push('/dashboard');
     }
 
     return (

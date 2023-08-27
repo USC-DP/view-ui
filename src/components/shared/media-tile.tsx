@@ -1,6 +1,6 @@
 import api from "@/api/api";
-import { PreviousContentContext } from "@/contexts/previous-content-context";
-import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
+import { PreviousContentContext, usePreviousContentContext } from "@/contexts/previous-content-context";
+import { VisiblePhotoContext, useVisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { MediaBox, ViewMedia } from "@/models/photo-display";
 import useViewTransitionRouter from "@/transition-lib/use-transition-router";
 import React from "react";
@@ -12,8 +12,8 @@ export default function MediaTile({ mediaBox, media }: { mediaBox: MediaBox, med
 
     const imageRef = React.useRef<HTMLDivElement>(null);
 
-    const { previousContent, setPreviousContent } = React.useContext(PreviousContentContext);
-    const {visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
+    const { previousContent, setPreviousContent } = usePreviousContentContext()
+    const { visiblePhotoContent, setVisiblePhotoContent } = useVisiblePhotoContext();
     const [clicked, setClicked] = React.useState<boolean>(false);
 
     function click() {

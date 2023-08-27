@@ -6,7 +6,7 @@ import PhotoTest from "@/components/dashboard/photos.test";
 import Searchbar from "@/components/dashboard/searchbar";
 import TopBar from "@/components/dashboard/topbar";
 import Navbar from "@/components/shared/navbar";
-import { UserContext } from "@/contexts/user-context";
+import { UserContext, useUserContext } from "@/contexts/user-context";
 import { VisiblePhotoContext } from "@/contexts/visible-photo-context";
 import { Box } from "@mui/material";
 import React from "react";
@@ -16,7 +16,7 @@ export default function Dashboard() {
 
     const [pageView, onPageViewChange] = React.useState<string>('list')
 
-    const { user } = React.useContext(UserContext);
+    const { user } = useUserContext();
     
 
 

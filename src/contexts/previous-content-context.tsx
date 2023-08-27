@@ -9,11 +9,28 @@ export type PreviousContentContext = {
 export const PreviousContentContext = React.createContext<{
     previousContent: PreviousContentContext;
     setPreviousContent: React.Dispatch<React.SetStateAction<PreviousContentContext>>;
-}>({
-    previousContent: {
-        mediaId: null,
-        scrollPosition: 0
-    },
-    setPreviousContent: () => { },
+} | null>(null);
 
-});
+const { Provider } = PreviousContentContext;
+
+export const PreviousContentProvider = ({ children }: any) => {
+    const [previousContent, setPreviousContent] = React.useState<PreviousContentContext>({
+        mediaId: null,
+        scrollPosition: 0,
+    });
+    
+    const contextValue = {
+        previousContent,
+        setPreviousContent
+    }
+
+    return <Provider value={contextValue}>({children})</Provider>
+}
+
+export const usePreviousContentContext = () => {
+    const context = React.useContext(PreviousContentContext);
+    if (context === undefined || context == null) {
+        throw new Error('usePreviousContentContext must be used within a PreviousContentProvider');
+    }
+    return context;
+};

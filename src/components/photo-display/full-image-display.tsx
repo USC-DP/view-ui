@@ -5,16 +5,16 @@ import './styles/full-image-display.css'
 import Image from "next/image";
 import React from 'react';
 import { Box, Button, Typography, styled, useTheme } from '@mui/material';
-import { VisiblePhotoContentType, VisiblePhotoContext } from '@/contexts/visible-photo-context';
+import { VisiblePhotoContentType, VisiblePhotoContext, useVisiblePhotoContext } from '@/contexts/visible-photo-context';
 import { relative } from 'path';
 import { PreviousContentContext } from '@/contexts/previous-content-context';
 import api from '@/api/api';
 
 
-export function FullImageDisplay({ data, setData }: { data?: VisiblePhotoContentType, setData?: React.Dispatch<React.SetStateAction<VisiblePhotoContentType>> }) {
+export function FullImageDisplay({ data, setData }: { data: VisiblePhotoContentType, setData: React.Dispatch<React.SetStateAction<VisiblePhotoContentType>> }) {
     const theme = useTheme();
 
-    const { visiblePhotoContent, setVisiblePhotoContent } = React.useContext(VisiblePhotoContext);
+    const { visiblePhotoContent, setVisiblePhotoContent } = useVisiblePhotoContext();
 
     React.useEffect(() => {
         //console.log(visiblePhotoContent.photo?.mediaId)

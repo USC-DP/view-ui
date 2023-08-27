@@ -4,7 +4,7 @@ import MediaSection from "../shared/media-section";
 import { PreviousContentContext } from "@/contexts/previous-content-context";
 import api from "@/api/api";
 import { Typography } from "@mui/joy";
-import { UserContext } from "@/contexts/user-context";
+import { UserContext, useUserContext } from "@/contexts/user-context";
 
 interface Dictionary {
     [key: string]: {
@@ -22,7 +22,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
     const [elementWidth, setElementWidth] = React.useState<number>(10000);
     const elementRef = React.useRef<HTMLDivElement>(null);
 
-    const { user } = React.useContext(UserContext);
+    const { user } = useUserContext();;
 
     React.useEffect(() => {
 
