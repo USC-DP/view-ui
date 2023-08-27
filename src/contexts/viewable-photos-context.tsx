@@ -24,7 +24,7 @@ export const ViewablePhotoProvider = ({ children }: any) => {
         setViewablePhotos
     }
 
-    return <Provider value={contextValue}>({children})</Provider>
+    return <Provider value={contextValue}>{children}</Provider>
 }
 
 export const useViewablePhotosContext = () => {

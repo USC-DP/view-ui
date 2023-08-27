@@ -24,7 +24,7 @@ export const PreviousContentProvider = ({ children }: any) => {
         setPreviousContent
     }
 
-    return <Provider value={contextValue}>({children})</Provider>
+    return <Provider value={contextValue}>{children}</Provider>
 }
 
 export const usePreviousContentContext = () => {

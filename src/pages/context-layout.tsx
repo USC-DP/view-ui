@@ -11,6 +11,6 @@ export default function ContextLayout({ children }: any) {
                         {children}
                     </PreviousContentProvider>
                 </ViewablePhotoProvider>
-        </UserProvider >
+        </UserProvider>
     )
 }
