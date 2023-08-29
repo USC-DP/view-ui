@@ -20,6 +20,7 @@ export default function Login() {
         api.login(username, password).then(data => {
             console.log(data.accessToken);
             setUserAuthInfo(data.accessToken)
+            console.log(data);
             //localStorage.setItem('token', data.accessToken)
             router.push('/dashboard');
         });
