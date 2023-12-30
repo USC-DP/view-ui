@@ -6,10 +6,10 @@ class Api {
 
     private getHeaders = () => ({
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-      });
-      
+    });
+
 
     public fetchPhotoUrl(photoId: string) {
         if (!photoId) {
@@ -24,8 +24,8 @@ class Api {
     }
 
     public async fetchPhoto(photoId: string | null) {
-        //const res = await axios.get(this.serverUrl + '/media/view/' + photoId);
-        //return res.data;
+        const res = await axios.get(this.serverUrl + '/media/view/' + photoId);
+        return res.data;
     }
 
     public async fetchPhotos(ownerId: string) {
@@ -39,7 +39,6 @@ class Api {
     }
 
     public async fetchSegments(sectionId: string, amount: number, searchTerm: string): Promise<ViewSegment[]> {
-        //let url = this.serverUrl + '/media/segments/' + sectionId + (searchTerm ? "?search=" + searchTerm : "");
         const res = await axios.post(this.serverUrl + "/media/search-segments/", { sectionId: sectionId, search: searchTerm, amount }, this.getHeaders());
         return res.data;
     }
@@ -53,7 +52,7 @@ class Api {
         const res = await axios.post(this.serverUrl + '/media/set-categories/', {
             mediaId: mediaId,
             tags: tags
-        },  this.getHeaders());
+        }, this.getHeaders());
         return res.data;
     }
 
@@ -70,6 +69,23 @@ class Api {
     public async searchMedia(searchTerm: string) {
         const res = await axios.get(this.serverUrl + '/media/search/' + searchTerm, this.getHeaders())
         return res.data;
+    }
+
+    public async uploadMedia(file: File, date: Date) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('lat', '0');
+        formData.append('lon', '0');
+        formData.append('dateTaken', date.toISOString());
+
+        let res;
+        try {
+             res = await axios.post(this.serverUrl + "/media/upload-media/", formData, this.getHeaders());
+        }
+        catch (error) {
+            console.log(error);
+        }
+        return res?.data;
     }
 
 }

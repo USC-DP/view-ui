@@ -75,7 +75,7 @@ export default function TopBar() {
                 <Toolbar sx={{ display: 'flex', flexDirection: { xs: 'column-reverse', sm: 'column-reverse', md: 'row' }, alignItems: 'center', justifyContent: 'space-around' }}>
                     {<Box sx={{ width: 175, height: 64, display: { xs: 'none', sm: 'block' } }}></Box>}
 
-                    <Search>
+                    {router && router.asPath != "/upload" && <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -93,7 +93,7 @@ export default function TopBar() {
                             onChange={(e) => setSearchText(e.target.value)}
                             inputProps={{ 'aria-label': 'search' }}
                         />
-                    </Search>
+                    </Search>}
 
 
                     {router && router.asPath == "/dashboard" &&

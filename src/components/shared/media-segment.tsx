@@ -21,7 +21,7 @@ function convertDate(dateString: string) {
 
     // Define an array of day names
     const days = [
-        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+        "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
     ];
 
     // Get the day, month, and year

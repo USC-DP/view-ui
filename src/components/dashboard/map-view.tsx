@@ -17,6 +17,8 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
 
 
     React.useEffect(() => {
+        console.log(isVisible);
+
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
@@ -90,13 +92,13 @@ export default function MapView({ isVisible }: { isVisible: boolean }) {
 
 
     return (
-        <div style={{ display: isVisible ? 'flex' : 'none', flexGrow: '1', flexDirection: 'column', overflow: 'hidden' }}>
+            <div style={{ display: isVisible ? 'flex' : 'none', flexGrow: '1', flexDirection: 'column', overflow: 'hidden', width: '100%' }}>
 
-            <div className="sidebar">
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                <div className="sidebar">
+                    Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                </div>
+                <div ref={mapContainer} className="map-container" />
             </div>
-            <div ref={mapContainer} className="map-container" />
-        </div>
 
     );
 }

@@ -47,7 +47,7 @@ export default function MyApp({ Component, pageProps, ...appProps }: {Component:
         <Box sx={{ display: "flex" }}>
           {/* <Navbar />*/}
           <Navbar />
-          <TopBar />
+            <TopBar />
           {/*Main content*/}
           <Box
             sx={{

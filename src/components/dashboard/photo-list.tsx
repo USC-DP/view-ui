@@ -127,7 +127,7 @@ export default function PhotoList({ isVisible }: { isVisible?: boolean }) {
         api.fetchSections(user.searchTerm)
             .then(
                 d => {
-
+                    //return;
                     let newVisibleSections: Dictionary = {}
 
                     let sectionMargin = 60;
